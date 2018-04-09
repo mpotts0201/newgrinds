@@ -1,24 +1,31 @@
-# README
+# newgrinds
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### Your Coffee Shop finder/reviewing app
 
-Things you may want to cover:
 
-* Ruby version
+## What is newgrinds?
 
-* System dependencies
+Welcome to **newgrinds**, the premier coffee shop finding/reviewing app.  newgrinds will pull from FourSquare's Places API to search for coffee shops near your location and display their locations to you.  You will get a glimpse of a shops price range, their contact info, and in later versions will implement google maps to tell you how long it could take to get there.  Every shop can be added to your favorites if you enjoyed your visit and plan on returning.  You can also leave a review so other users can see what you think! 
 
-* Configuration
+## Some technical details:
 
-* Database creation
+* Ruby version 2.4.2
 
-* Database initialization
+* Deployment will be on heroku
 
-* How to run the test suite
+* Uses PostgreSQL 
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## Resources
 
-* ...
+* ![ERD Models for newgrinds](/readmefiles/newgrinds_ERD.png)
+
+
+* [Heroku Deployment](https://newgrinds.herokuapp.com/)
+
+
+* [My Trello Board](https://trello.com/b/NbCZj0As/newgrinds)
+
+
+* ![My WireFrame](/readmefiles/IMG_20180409_153450.jpg)
+
