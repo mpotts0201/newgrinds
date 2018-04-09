@@ -16,16 +16,19 @@ Welcome to **newgrinds**, the premier coffee shop finding/reviewing app.  newgri
 * Uses PostgreSQL 
 
 
-## Resources
+## Models/ERD
 
-* ![ERD Models for newgrinds](/readmefiles/newgrinds_ERD.png)
+![ERD Models for newgrinds](/readmefiles/newgrinds_ERD.png)
 
 
+
+## My Wireframes
+![My WireFrame](/readmefiles/IMG_20180409_153450.jpg)
+
+
+
+## Links
 * [Heroku Deployment](https://newgrinds.herokuapp.com/)
 
 
 * [My Trello Board](https://trello.com/b/NbCZj0As/newgrinds)
-
-
-* ![My WireFrame](/readmefiles/IMG_20180409_153450.jpg)
-
