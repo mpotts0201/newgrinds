@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import CoffeeShopList from './components/CoffeeShopList'
 import CoffeeShopShow from './components/CoffeeShopShow'
 import NavBar from './components/NavBar'
-import dotenv from 'dotenv/config'
+import dotenv from 'dotenv'
+dotenv.config()
 
 
 
@@ -23,6 +24,7 @@ class App extends Component {
 
   componentDidMount() {
     // this.requestCurrentPosition()
+    console.log(process.env.hidden_key)
     this.getShops()
 
 
