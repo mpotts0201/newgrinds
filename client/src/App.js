@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import CoffeeShopList from './components/CoffeeShopList'
 import CoffeeShopShow from './components/CoffeeShopShow'
 import NavBar from './components/NavBar'
+import dotenv from 'dotenv/config'
+
 
 
 class App extends Component {
@@ -25,7 +27,7 @@ class App extends Component {
 
 
   }
-  // Google key AIzaSyAhd3Coj_Y9FS4Y1OEYllqN1rTa1Rzjq08
+
 
   requestCurrentPosition = async() => {
     await navigator.geolocation.getCurrentPosition(
@@ -50,8 +52,8 @@ class App extends Component {
       method: 'GET',
       url: 'https://api.foursquare.com/v2/venues/search',
       params: {
-        client_id: client_id,
-        client_secret: client_secret,
+        client_id: process.env.client_id,
+        client_secret: process.env.client_secret,
         // ll: `${lat},${long}`,
         // ll: '33.7722584, -84.3665152',
         near: 'Atlanta, GA',
