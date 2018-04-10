@@ -11,15 +11,39 @@ import NavBar from './components/NavBar'
 class App extends Component {
 
   state = {
-    coffeeShops: []
+    coffeeShops: [],
+    lat: '33.7722584',
+    long: '-84.3665152',
+    error: null,
   }
 
+
+
   componentDidMount() {
+    // this.requestCurrentPosition()
     this.getShops()
+
+
   }
   // Google key AIzaSyAhd3Coj_Y9FS4Y1OEYllqN1rTa1Rzjq08
 
+  requestCurrentPosition = async() => {
+    await navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+          error: null,
+        });
+        // this.getShops(position.coords.latitude, position.coords.longitude)
+        // this.getShops(33.7722584, -84.3665152)
 
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
+    );
+    
+  }
 
   getShops = async () => {
     const res = await axios({
@@ -28,7 +52,8 @@ class App extends Component {
       params: {
         client_id: 'OAE53NLS2LND0FHVZ14GBSLES2CB2JWNFM200JMSBHPNHGBB',
         client_secret: 'VS0QRUM1VDO0U2CMTS1HTCWUF5ZG0PH4UPM3O34GPP2F40KF',
-        // ll: '40.7243,-74.0018',
+        // ll: `${lat},${long}`,
+        // ll: '33.7722584, -84.3665152',
         near: 'Atlanta, GA',
         query: 'coffee',
         v: '20180323',
