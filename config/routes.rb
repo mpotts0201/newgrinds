@@ -1,25 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
-    get 'users/index'
+    resources :users
   end
 
-  namespace :api do
-    get 'users/show'
+  namespace :api do 
+    resources :coffee_shops
   end
 
-  namespace :api do
-    get 'users/create'
-  end
-
-  namespace :api do
-    get 'users/delete'
-  end
-
-  namespace :api do
-    get 'users/update'
-  end
-
-  namespace :api do
-    resources :coffee
-  end 
 end
