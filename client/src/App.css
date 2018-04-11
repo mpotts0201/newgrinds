@@ -1,3 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Gudea|Shrikhand');
+
+h1 {
+  font-family: 'Anton', sans-serif;
+  color: rgb(255, 252, 220);
+  font-weight: 700;
+}
+
+.header {
+  text-decoration: none;
+}
+
+span {
+  font-weight: 100;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.bar {
+  display: flex;
+  flex-direction: row;
+}
+
+ul>li {
+  list-style: none;
+  margin: 5px 10px;
+  /* background: rgba(0, 0, 0, 0.425); */
+  border-radius: 5px;
+  padding: 5px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 700;
+
+}
+
+ul>li:hover {
+  background: rgba(0, 0, 0, 0.247);
+
+}
+
+ul>li>.menu {
+  color: rgb(255, 252, 220);
+  text-decoration: none;
+  font-size: 20px;
+}
+
+ul>li>.menu:hover {
+  cursor: pointer;
+  /* color: rgb(255, 241, 87); */
+}
+
+.link {
+  color: rgb(255, 252, 220);
+  font-family: 'Gudea', sans-serif;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.425);
+  border-radius: 5px;
+  width: 75vw;
+  padding: 5px;
+
+}
+
+.link:hover {
+  cursor: pointer;
+  color: rgb(255, 241, 87);
+  background: rgba(0, 0, 0, 0.603);
+
+}
+
 .App {
   text-align: center;
 }
@@ -25,4 +97,8 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+body {
+  background: url('./img/newgrinds_background.jpg');
 }

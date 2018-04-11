@@ -7,7 +7,7 @@ class CoffeeShopList extends Component {
             <div>
                 {this.props.coffeeShops.map((shop, i) => {
                     return (
-                        <h1 key={i}><Link to=''>{shop.name}</Link></h1>
+                        <h3 key={i}><Link className='link' to=''>{shop.name}</Link></h3>
                     )
                 })}
             </div>

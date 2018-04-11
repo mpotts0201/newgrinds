@@ -54,8 +54,8 @@ class App extends Component {
       method: 'GET',
       url: 'https://api.foursquare.com/v2/venues/search',
       params: {
-        client_id: process.env.client_id,
-        client_secret: process.env.client_secret,
+        client_id: '',
+        client_secret: '',
         // ll: `${lat},${long}`,
         // ll: '33.7722584, -84.3665152',
         near: 'Atlanta, GA',
