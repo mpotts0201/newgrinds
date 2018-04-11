@@ -15,7 +15,6 @@ class CoffeeShopShow extends Component {
     componentDidMount(){
         const id = this.props.match.params.id
         console.log(id)
-
         this.setState({coffeeShops: this.props.coffeeShops})
         this.props.getShops()
     }
@@ -23,7 +22,7 @@ class CoffeeShopShow extends Component {
     getShop = async () => {
         const res = await axios({
           method: 'GET',
-          url: `https://api.foursquare.com/v2/venues/4e495987ae6014a2fdc4ccf9?`,
+          url: `https://api.foursquare.com/v2/venues/1523478074?`,
           params: {
             client_id: 'OAE53NLS2LND0FHVZ14GBSLES2CB2JWNFM200JMSBHPNHGBB',
             client_secret: 'VS0QRUM1VDO0U2CMTS1HTCWUF5ZG0PH4UPM3O34GPP2F40KF',
