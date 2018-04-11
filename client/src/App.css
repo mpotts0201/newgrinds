@@ -4,6 +4,7 @@ h1 {
   font-family: 'Anton', sans-serif;
   color: rgb(255, 252, 220);
   font-weight: 700;
+  font-size: 40px;
 }
 
 .header {
@@ -83,7 +84,7 @@ ul>li>.menu:hover {
   background-color: #222;
   height: 150px;
   padding: 20px;
-  color: white;
+  color: rgb(255, 252, 220);
 }
 
 .App-title {
@@ -102,3 +103,21 @@ ul>li>.menu:hover {
 body {
   background: url('./img/newgrinds_background.jpg');
 }
+
+h3 {
+  color: rgb(255, 252, 220);
+  font-family: 'Anton', sans-serif;
+  font-weight: 700;
+
+}
+
+a{
+  color: rgb(144, 248, 255);
+  text-decoration: none;
+
+}
+
+.address{
+  font-weight: 100;
+}
+

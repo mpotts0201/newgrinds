@@ -7,22 +7,21 @@ import CoffeeShopList from './components/CoffeeShopList'
 import CoffeeShopShow from './components/CoffeeShopShow'
 import NavBar from './components/NavBar'
 import dotenv from 'dotenv'
-
-
+dotenv.config({silent:true})
 
 class App extends Component {
 
   state = {
     coffeeShops: [],
-    lat: '33.7722584',
-    long: '-84.3665152',
+    lat: null,
+    long: null,
     error: null,
   }
 
 
 
   componentDidMount() {
-    // this.requestCurrentPosition()
+    this.requestCurrentPosition()
     console.log(process.env.hidden_key)
     this.getShops()
 
@@ -53,8 +52,8 @@ class App extends Component {
       method: 'GET',
       url: 'https://api.foursquare.com/v2/venues/search',
       params: {
-        client_id: '',
-        client_secret: '',
+        client_id: 'OAE53NLS2LND0FHVZ14GBSLES2CB2JWNFM200JMSBHPNHGBB',
+        client_secret: 'VS0QRUM1VDO0U2CMTS1HTCWUF5ZG0PH4UPM3O34GPP2F40KF',
         // ll: `${lat},${long}`,
         // ll: '33.7722584, -84.3665152',
         near: 'Atlanta, GA',
@@ -75,26 +74,24 @@ class App extends Component {
 
 
     const CoffeeShopListWrapper = (props) => {
-      return <CoffeeShopList coffeeShops={this.state.coffeeShops} props={props}/>
+      return <CoffeeShopList coffeeShops={this.state.coffeeShops} {...props}/>
     }
   
     const CoffeeShopShowWrapper = (props) => {
-      return <CoffeeShopShow coffeeShops={this.state.coffeeShops} props={props}/>
+      return <CoffeeShopShow getShops={this.getShops} coffeeShops={this.state.coffeeShops} {...props}/>
     }
 
 
     return (
-      <div className="App">
         <Router>
-          <div>
+          <div  className='App'>
             <NavBar />
             <Switch>
               <Route exact path = '/' render={CoffeeShopListWrapper}/>
-              <Route exact path = '/coffee_shop' render={CoffeeShopShowWrapper} />
+              <Route exact path = '/coffeeShop/:id' render={CoffeeShopShowWrapper} />
             </Switch>
           </div>
         </Router>
-      </div>
     );
   }
 }

@@ -13,5 +13,15 @@ class Api::CoffeeShopsController < ApplicationController
         }
     end
 
+    def create
+        @coffee_shop = CoffeeShop.create(coffee_shop_params)
+        
+    end
+
+    private
+
+    def coffee_shop_params
+        params.require(:coffee_shop).permit(:name, :address, :hours)
+    end
 
 end
