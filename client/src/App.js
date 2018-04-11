@@ -7,7 +7,6 @@ import CoffeeShopList from './components/CoffeeShopList'
 import CoffeeShopShow from './components/CoffeeShopShow'
 import NavBar from './components/NavBar'
 import dotenv from 'dotenv'
-dotenv.config()
 
 
 
