@@ -117,7 +117,16 @@ a{
 
 }
 
-.address{
+.address, .search{
   font-weight: 100;
+  color: rgb(255, 252, 220);
+}
+
+input{
+  background: none;
+  color: rgb(255, 252, 220);
+  border: none;
+  border-bottom: 1px solid rgb(255, 252, 220);
+  
 }
 

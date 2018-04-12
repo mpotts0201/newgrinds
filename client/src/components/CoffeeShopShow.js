@@ -10,13 +10,11 @@ class CoffeeShopShow extends Component {
     state = {
         coffeeShops: [],
         coffeeShop: {},
+        
     }
 
     componentDidMount(){
-        const id = this.props.match.params.id
-        console.log(id)
-        this.setState({coffeeShops: this.props.coffeeShops})
-        this.props.getShops()
+        this.navCall()
     }
 
     getShop = async () => {
@@ -33,6 +31,10 @@ class CoffeeShopShow extends Component {
         // console.log(res.data.response.groups[0].items)
       }
     
+      navCall = async() => {
+        const res = await axios.get('https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key=AIzaSyDhik26QdA3b09N5JGtTnORhD2zyZLDJkk')
+        console.log(res)
+      }
 
 
     render() {

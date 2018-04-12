@@ -18,7 +18,7 @@ class App extends Component {
     error: null,
   }
 
-
+//AIzaSyDhik26QdA3b09N5JGtTnORhD2zyZLDJkk
 
   componentDidMount() {
     this.requestCurrentPosition()
@@ -56,7 +56,7 @@ class App extends Component {
         client_secret: 'VS0QRUM1VDO0U2CMTS1HTCWUF5ZG0PH4UPM3O34GPP2F40KF',
         // ll: `${lat},${long}`,
         // ll: '33.7722584, -84.3665152',
-        near: 'Atlanta, GA',
+        near: 'Athens, GA',
         query: 'coffee',
         v: '20180323',
         limit: 5,
