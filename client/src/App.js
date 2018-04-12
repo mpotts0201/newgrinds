@@ -62,7 +62,7 @@ class App extends Component {
         client_secret: process.env.REACT_APP_CLIENT_SECRET,
         // ll: `${lat},${long}`,
         // ll: '33.7722584, -84.3665152',
-        near: city + ', GA',
+        near: city + ',GA',
         query: 'coffee',
         v: '20180323',
         limit: 5,
