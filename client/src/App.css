@@ -19,6 +19,7 @@ span {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  animation: navbar 0.75s ease-in;
 }
 
 .bar {
@@ -52,6 +53,7 @@ ul>li>.menu:hover {
   cursor: pointer;
   /* color: rgb(255, 241, 87); */
 }
+
 
 .link {
   color: rgb(255, 252, 220);
@@ -130,3 +132,43 @@ input{
   
 }
 
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
+
+
+@keyframes navbar {
+  0% {
+    opacity: 0;
+    transform: translateY(-15%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+.list {
+  animation: slide 0.5s ease-in;
+
+}

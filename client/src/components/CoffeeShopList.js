@@ -6,14 +6,14 @@ import Search from './Search'
 class CoffeeShopList extends Component {
     render() {
         return (
-            <div>
+            <div className='list'>
                 <Search handleChange={this.props.handleChange}
                 value={this.props.value}
                 handleSubmit={this.props.handleSubmit}
                 />
                 {this.props.coffeeShops.map((shop, i) => {
                     return (
-                        <h3 key={i}><Link className='link' to={`/coffeeShop/${shop.id}`}>{shop.name}</Link></h3>
+                        <h3 key={i} className='list'><Link className='link' to={`/coffeeShop/${shop.id}`}>{shop.name}</Link></h3>
                     )
                 })}
             </div>

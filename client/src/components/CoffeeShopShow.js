@@ -39,7 +39,7 @@ class CoffeeShopShow extends Component {
 
     render() {
         return (
-            <div>
+            <div className='list'>
 
                     {
                         this.props.coffeeShops.map((shop, i) => {
