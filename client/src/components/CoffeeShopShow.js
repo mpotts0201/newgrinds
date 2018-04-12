@@ -20,7 +20,7 @@ class CoffeeShopShow extends Component {
     getShop = async () => {
         const res = await axios({
           method: 'GET',
-          url: `https://api.foursquare.com/v2/venues/1523478074?`,
+          url: `https://api.foursquare.com/v2/venues/`,
           params: {
             client_id: 'OAE53NLS2LND0FHVZ14GBSLES2CB2JWNFM200JMSBHPNHGBB',
             client_secret: 'VS0QRUM1VDO0U2CMTS1HTCWUF5ZG0PH4UPM3O34GPP2F40KF',
@@ -32,7 +32,7 @@ class CoffeeShopShow extends Component {
       }
     
       navCall = async() => {
-        const res = await axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key=${process.env.REACT_APP_GOOGLE_NAV}`)
+        const res = await axios.get(`/api/coffee_shops/${this.props.match.params.id}`)
         console.log(res)
       }
 

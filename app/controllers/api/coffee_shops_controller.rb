@@ -1,4 +1,7 @@
 class Api::CoffeeShopsController < ApplicationController
+    
+
+    
     def index
         @coffee_shops = CoffeeShop.all 
         render json: {
@@ -6,10 +9,16 @@ class Api::CoffeeShopsController < ApplicationController
         }
     end
 
-    def show 
-        @coffee_shop = CoffeeShop.find(params[:id])
+    def show
+        venue_id = params[:id]
+        @coffee_shop = CoffeeShop.getShop(venue_id)
+        location = @coffee_shop["response"]["venue"]["location"]["formattedAddress"]
+        puts location
+        @navigation = CoffeeShop.nav(location)
+        
         render json: {
-            coffee_shop: @coffee_shop
+            coffee_shop: @coffee_shop,
+            navigation: @navigation
         }
     end
 
@@ -17,6 +26,9 @@ class Api::CoffeeShopsController < ApplicationController
         @coffee_shop = CoffeeShop.create(coffee_shop_params)
         
     end
+
+
+
 
     private
 

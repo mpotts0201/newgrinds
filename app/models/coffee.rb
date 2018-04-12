@@ -1,4 +1,0 @@
-class Coffee < ApplicationRecord
-
-
-end
