@@ -3,9 +3,12 @@ import React, { Component } from 'react';
 class Search extends Component {
     render() {
         return (
-            <form>
-                <label className='search'>Enter your City, State:
-                <input type='text' name='city'/>
+            <form onSubmit={this.props.handleSubmit}>
+                <label className='search'>Enter your City: 
+                <input type='text' name='city' 
+                onChange={this.props.handleChange}
+                value={this.props.value}
+                />
                 </label>
             </form>
         );

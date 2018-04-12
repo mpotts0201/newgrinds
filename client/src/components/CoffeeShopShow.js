@@ -10,7 +10,7 @@ class CoffeeShopShow extends Component {
     state = {
         coffeeShops: [],
         coffeeShop: {},
-        
+
     }
 
     componentDidMount(){
@@ -32,7 +32,7 @@ class CoffeeShopShow extends Component {
       }
     
       navCall = async() => {
-        const res = await axios.get('https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key=AIzaSyDhik26QdA3b09N5JGtTnORhD2zyZLDJkk')
+        const res = await axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key=${process.env.REACT_APP_GOOGLE_NAV}`)
         console.log(res)
       }
 
