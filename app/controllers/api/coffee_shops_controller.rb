@@ -3,8 +3,9 @@ class Api::CoffeeShopsController < ApplicationController
 
     
     def index
-        @coffee_shops = CoffeeShop.getShops 
         
+        @coffee_shops = CoffeeShop.getShops 
+
         render json: {
             coffee_shops: @coffee_shops
         }
