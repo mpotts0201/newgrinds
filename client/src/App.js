@@ -21,7 +21,13 @@ class App extends Component {
   componentDidMount() {
     this.requestCurrentPosition()
     // this.getShops()
+    this.getShopsBackend()
 
+  }
+
+  getShopsBackend = async() => {
+    const res = await axios.get("/api/coffee_shops/")
+    console.log(res)
   }
 
   handleChange = (event) => {

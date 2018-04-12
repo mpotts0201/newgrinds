@@ -3,10 +3,13 @@ class Api::CoffeeShopsController < ApplicationController
 
     
     def index
-        @coffee_shops = CoffeeShop.all 
+        @coffee_shops = CoffeeShop.getShops 
+        
         render json: {
             coffee_shops: @coffee_shops
         }
+
+
     end
 
     def show
@@ -21,6 +24,8 @@ class Api::CoffeeShopsController < ApplicationController
             navigation: @navigation
         }
     end
+
+
 
     def create
         @coffee_shop = CoffeeShop.create(coffee_shop_params)
