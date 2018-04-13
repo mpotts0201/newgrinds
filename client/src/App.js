@@ -25,7 +25,15 @@ class App extends Component {
 
   }
 
+  sendShop = async() => {
+    const res = await axios.post("/api/coffee_shops", {
+      city: this.state.value
+    })
+    console.log(res)
+  }
+
   getShopsBackend = async() => {
+
     const res = await axios.get(`/api/coffee_shops/`)
     this.setState({ coffeeShops: res.data.coffee_shops.response.venues })
     console.log(res)

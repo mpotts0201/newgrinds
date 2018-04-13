@@ -19,7 +19,7 @@ span {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  animation: navbar 0.75s ease-in;
+  animation: navbar 0.25s ease-in;
 }
 
 .bar {
@@ -135,7 +135,7 @@ input{
 @keyframes slide {
   0% {
     opacity: 0;
-    transform: translateX(-50%);
+    transform: translateX(-10%);
   }
   100% {
     opacity: 1;
@@ -160,7 +160,7 @@ input{
 @keyframes navbar {
   0% {
     opacity: 0;
-    transform: translateY(-15%);
+    transform: translateY(-10%);
   }
   100% {
     opacity: 1;
@@ -169,6 +169,6 @@ input{
 }
 
 .list {
-  animation: slide 0.5s ease-in;
+  animation: slide 0.25s ease-in;
 
 }
