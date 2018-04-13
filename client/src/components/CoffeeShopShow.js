@@ -12,12 +12,11 @@ class CoffeeShopShow extends Component {
         coffeeShop: {
             name: null,
         },
-        navigation: [],
 
     }
 
     componentDidMount() {
-        this.callShopData()
+        this.callNavData()
     }
 
     getShop = async () => {
@@ -34,11 +33,12 @@ class CoffeeShopShow extends Component {
         // console.log(res.data.response.groups[0].items)
     }
 
-    callShopData = async () => {
+    callNavData = async () => {
         const res = await axios.get(`/api/coffee_shops/${this.props.match.params.id}`)
-        console.log(res.data.coffee_shop.response.venue)
-        // this.setState({ coffeeShop: res.data.coffee_shop.response.venue })
-        // console.log(this.state.coffeeShop.location)
+        const navigation = res.data.navigation.routes[0].legs[0]
+        this.setState({ navigation: navigation })
+        console.log(this.state.navigation)
+
     }
 
 
@@ -62,22 +62,27 @@ class CoffeeShopShow extends Component {
 
 
                 {
-                        this.props.coffeeShops.map((shop, i) => {
-                            if(shop.id == this.props.match.params.id){
-                                return (
-                                    <div key={i}>
-                                        <h1>{shop.name}</h1>
-                                        <h3>{shop.location.formattedAddress.map((each, i) => {
-                                            return (
+                    this.props.coffeeShops.map((shop, i) => {
+                        if (shop.id == this.props.match.params.id) {
+                            return (
+                                <div key={i} className='update'>
+                                    <h1>{shop.name}</h1>
+                                    <h3>{shop.location.formattedAddress.map((each, i) => {
+                                        return (
                                             <div className='address' key={i}>{each}</div>
-                                            )
-                                        })}</h3>
-                                        <a href={shop.url}>{shop.url}</a>
-                                    </div>
-                                )
-                            }
-                        })
-                    }
+                                        )
+                                    })}</h3>
+                                    {this.state.navigation
+                                        ? <p>{this.state.navigation.distance.text}, {this.state.navigation.duration.text} to drive to {shop.name}</p>
+
+                                        : null}
+                                    <a href={shop.url}>{shop.url}</a>
+                                </div>
+                            )
+                        }
+                    })
+                }
+
 
             </div>
         );

@@ -6,9 +6,9 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import CoffeeShopList from './components/CoffeeShopList'
 import CoffeeShopShow from './components/CoffeeShopShow'
 import NavBar from './components/NavBar'
-import NewUser from './components/NewUser'
-
-
+import NewUser from './components/User/NewUser'
+import UserIndex from './components/User/UserIndex'
+import UserShow from './components/User/UserShow'
 class App extends Component {
 
   state = {
@@ -31,6 +31,7 @@ class App extends Component {
     const res = await axios.post("/search", {
       city: this.state.value
     })
+    console.log(res)
     this.setState({ coffeeShops: res.data.coffee_shops.response.venues })
   }
 
@@ -70,30 +71,34 @@ class App extends Component {
 
   }
 
-  getShops = async (city) => {
-    const res = await axios({
-      method: 'GET',
-      url: 'https://api.foursquare.com/v2/venues/search',
-      params: {
-        client_id: process.env.REACT_APP_CLIENT_ID,
-        client_secret: process.env.REACT_APP_CLIENT_SECRET,
-        // ll: `${lat},${long}`,
-        // ll: '33.7722584, -84.3665152',
-        near: city + ',GA',
-        query: 'coffee',
-        v: '20180323',
-        limit: 5,
-        sortByDistance: 1,
-      }
-    })
-    this.setState({ coffeeShops: res.data.response.venues })
-    // console.log(res.data.response.groups[0].items)
-    console.log(res.data.response.venues)
-  }
+  // getShops = async (city) => {
+  //   const res = await axios({
+  //     method: 'GET',
+  //     url: 'https://api.foursquare.com/v2/venues/search',
+  //     params: {
+  //       client_id: process.env.REACT_APP_CLIENT_ID,
+  //       client_secret: process.env.REACT_APP_CLIENT_SECRET,
+  //       // ll: `${lat},${long}`,
+  //       // ll: '33.7722584, -84.3665152',
+  //       near: city + ',GA',
+  //       query: 'coffee',
+  //       v: '20180323',
+  //       limit: 5,
+  //       sortByDistance: 1,
+  //     }
+  //   })
+  //   this.setState({ coffeeShops: res.data.response.venues })
+  //   // console.log(res.data.response.groups[0].items)
+  //   console.log(res.data.response.venues)
+  // }
 
 
 
   render() {
+
+    const UserShowWrapper = (props) => {
+      return <UserShow {...props}/>
+    }
 
 
     const CoffeeShopListWrapper = (props) => {
@@ -117,6 +122,8 @@ class App extends Component {
             <Route exact path = '/new' component={NewUser}/>
             <Route exact path='/' render={CoffeeShopListWrapper} />
             <Route exact path='/coffeeShop/:id' render={CoffeeShopShowWrapper} />
+            <Route exact path='/index' component={UserIndex}/>
+            <Route exact path='/users/:userId' render={UserShowWrapper}/>
           </Switch>
         </div>
       </Router>

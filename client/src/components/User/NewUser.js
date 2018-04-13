@@ -38,8 +38,9 @@ this.setState(newState)
                         placeholder='Tell us about yourself' 
                         onChange={this.handleChange} 
                         value={this.state.aboutMe} />
-                    
+                    <button>Submit</button>
                 </form>
+
             </div>
         );
     }

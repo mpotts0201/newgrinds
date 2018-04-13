@@ -55,14 +55,15 @@ ul>li>.menu:hover {
 }
 
 
-.link {
+.link, .update {
   color: rgb(255, 252, 220);
   font-family: 'Gudea', sans-serif;
   text-decoration: none;
   background: rgba(0, 0, 0, 0.425);
   border-radius: 5px;
   width: 75vw;
-  padding: 5px;
+  padding: 10px;
+  margin: 10px;
 
 }
 
@@ -104,13 +105,23 @@ ul>li>.menu:hover {
 
 body {
   background: url('./img/newgrinds_background.jpg');
+  height: 80%;
+  display: flex;
+  justify-content: center;
 }
 
-h3 {
+h3 ,h2{
   color: rgb(255, 252, 220);
   font-family: 'Anton', sans-serif;
   font-weight: 700;
 
+}
+
+h4{
+  color: rgb(255, 252, 220);
+  font-family: 'Anton', sans-serif;
+  font-weight: 100;
+  
 }
 
 a{
@@ -173,6 +184,19 @@ input, textarea{
 
 }
 
+.update{
+  animation: slide 0.25s ease-in;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
 @media(max-width: 500px){
   .nav {
     flex-direction: column;
@@ -180,8 +204,11 @@ input, textarea{
   h1{
     font-size: 30px;
   }
-  h3,h2{
+  h3,h2,h4{
     font-size: 15px;
+    color: rgb(255, 252, 220);
+    font-family: 'Anton', sans-serif;
+    font-weight: 100;
   }
 
   .menu{

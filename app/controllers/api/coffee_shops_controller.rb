@@ -17,11 +17,8 @@ class Api::CoffeeShopsController < ApplicationController
         venue_id = params[:id]
         @coffee_shop = CoffeeShop.getShop(venue_id)
         location = @coffee_shop["response"]["venue"]["location"]["formattedAddress"]
-        puts location
         @navigation = CoffeeShop.nav(location)
-        
         render json: {
-            coffee_shop: @coffee_shop,
             navigation: @navigation
         }
     end
@@ -37,8 +34,9 @@ class Api::CoffeeShopsController < ApplicationController
         @city = params[:city]
         @coffee_shops = CoffeeShop.getShops(@city)
 
+
         render json: {
-            coffee_shops: @coffee_shops
+            coffee_shops: @coffee_shops,
         }
     end
 
