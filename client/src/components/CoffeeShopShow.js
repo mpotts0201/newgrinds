@@ -73,7 +73,7 @@ class CoffeeShopShow extends Component {
                                         )
                                     })}</h3>
                                     {this.state.navigation
-                                        ? <p>{this.state.navigation.distance.text}, {this.state.navigation.duration.text} to drive to {shop.name}</p>
+                                        ? <p>{this.state.navigation.distance.text}, {this.state.navigation.duration.text} to drive to {shop.name} from {this.state.navigation.start_address}</p>
 
                                         : null}
                                     <a href={shop.url}>{shop.url}</a>
