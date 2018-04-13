@@ -124,7 +124,7 @@ a{
   color: rgb(255, 252, 220);
 }
 
-input{
+input, textarea{
   background: none;
   color: rgb(255, 252, 220);
   border: none;
@@ -170,5 +170,22 @@ input{
 
 .list {
   animation: slide 0.25s ease-in;
+
+}
+
+@media(max-width: 500px){
+  .nav {
+    flex-direction: column;
+  }
+  h1{
+    font-size: 30px;
+  }
+  h3,h2{
+    font-size: 15px;
+  }
+
+  .menu{
+    font-size: 10px;
+  }
 
 }
