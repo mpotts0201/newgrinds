@@ -11,7 +11,7 @@ class UserIndex extends Component {
         this.getUsers()
     }
 
-    getUsers = async () => {
+    getUsers = async() => {
         const res = await axios.get('/api/users')
         this.setState({
             users: res.data.users

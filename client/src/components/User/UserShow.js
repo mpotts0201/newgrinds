@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import UserIndex from './UserIndex'
+import { Redirect } from 'react-router-dom'
 
 
 class UserShow extends Component {
     state = {
-        showEdit: false
+        showEdit: false,
+        redirectToUsers: false
     }
 
     componentDidMount() {
         this.getUser()
     }
 
-    getUser = async () => {
+    getUser = async() => {
         const res = await axios.get(`/api/users/${this.props.match.params.userId}`)
         this.setState({
             name: res.data.user.name,
@@ -20,8 +23,13 @@ class UserShow extends Component {
 
     }
 
-    handleSubmit = () => {
-
+    handleSubmit = async(event) => {
+        event.preventDefault()
+        console.log(this.state.name)
+        const res = axios.patch(`/api/users/${this.props.match.params.userId}`,{
+            name: this.state.name,
+            aboutMe: this.state.aboutMe
+        })
     }
 
     handleChange = (event) => {
@@ -35,12 +43,24 @@ class UserShow extends Component {
         this.setState({ showEdit: !this.state.showEdit })
     }
 
+    handleDelete = async() => {
+        const res = axios.delete(`/api/users/${this.props.match.params.userId}`)
+        console.log(res)
+        this.setState({ redirectToUsers: !this.state.redirectToUsers })
+        // this.props.getUsers()
+        
+    }
+
     render() {
+        if(this.state.redirectToUsers){
+            return <Redirect to='/users' render={UserIndex}/>
+        }
         return (
             <div className='update' >
                 <h1>{this.state.name}</h1>
                 <h4>{this.state.aboutMe}</h4>
                 <button onClick={this.toggle}>Update User Info</button>
+                <button onClick={this.handleDelete}>Delete User Account</button>
                 {this.state.showEdit
                     ?
                     <div>
