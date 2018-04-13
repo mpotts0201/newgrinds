@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  # get '/coffee_shops/:id' to: 'coffee_shops#show'
+  post '/search', to: 'api/coffee_shops#search'
+
 
   namespace :api do
     resources :users

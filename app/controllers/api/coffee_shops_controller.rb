@@ -3,7 +3,7 @@ class Api::CoffeeShopsController < ApplicationController
 
     
     def index
-        
+
         @coffee_shops = CoffeeShop.getShops 
 
         render json: {
@@ -33,6 +33,14 @@ class Api::CoffeeShopsController < ApplicationController
         
     end
 
+    def search
+        @city = params[:city]
+        @coffee_shops = CoffeeShop.getShops(@city)
+
+        render json: {
+            coffee_shops: @coffee_shops
+        }
+    end
 
 
 

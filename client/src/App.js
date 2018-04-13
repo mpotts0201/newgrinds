@@ -21,15 +21,15 @@ class App extends Component {
   componentDidMount() {
     this.requestCurrentPosition()
     // this.getShops()
-    this.getShopsBackend()
+    // this.getShopsBackend()
 
   }
 
   sendShop = async() => {
-    const res = await axios.post("/api/coffee_shops", {
+    const res = await axios.post("/search", {
       city: this.state.value
     })
-    console.log(res)
+    this.setState({ coffeeShops: res.data.coffee_shops.response.venues })
   }
 
   getShopsBackend = async() => {
@@ -45,8 +45,8 @@ class App extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.getShops(this.state.value)
-
+    // this.getShops(this.state.value)
+    this.sendShop()
   }
 
 

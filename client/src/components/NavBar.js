@@ -8,8 +8,10 @@ class NavBar extends Component {
             <div className='nav'>
                 <Link className='header' to='/'><h1>new<span>grinds</span></h1></Link>
                 <ul className='bar'>
-                    <li><Link className='menu' to='/'>user<span>page</span></Link></li>
+                    <li><Link className='menu' to='/index'>user<span>page</span></Link></li>
                     <li><Link className='menu' to='/favorites'>favorite<span>shops</span></Link></li>
+                    <li><Link className='menu' to='/new'>new<span>user</span></Link></li>
+
                 </ul>
             </div>
         );
