@@ -10,28 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411212423) do
+ActiveRecord::Schema.define(version: 20180414225313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "coffee_shops", force: :cascade do |t|
     t.string "name"
-    t.string "address"
     t.string "hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "api_id"
+    t.string "address"
+    t.string "description"
   end
 
   create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.string "text"
-    t.bigint "users_id"
-    t.bigint "coffee_shops_id"
+    t.integer "stars"
+    t.bigint "user_id"
+    t.bigint "coffee_shop_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["coffee_shops_id"], name: "index_reviews_on_coffee_shops_id"
-    t.index ["users_id"], name: "index_reviews_on_users_id"
+    t.index ["coffee_shop_id"], name: "index_reviews_on_coffee_shop_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,6 +44,6 @@ ActiveRecord::Schema.define(version: 20180411212423) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "reviews", "coffee_shops", column: "coffee_shops_id"
-  add_foreign_key "reviews", "users", column: "users_id"
+  add_foreign_key "reviews", "coffee_shops"
+  add_foreign_key "reviews", "users"
 end

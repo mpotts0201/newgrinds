@@ -4,7 +4,7 @@ class Api::CoffeeShopsController < ApplicationController
     
     def index
 
-        @coffee_shops = CoffeeShop.getShops 
+        @coffee_shops = CoffeeShop.all 
 
         render json: {
             coffee_shops: @coffee_shops
@@ -16,10 +16,13 @@ class Api::CoffeeShopsController < ApplicationController
     def show
         venue_id = params[:id]
         @coffee_shop = CoffeeShop.getShop(venue_id)
+        @reviews = @coffee_shop.reviews
         location = @coffee_shop["response"]["venue"]["location"]["formattedAddress"]
         @navigation = CoffeeShop.nav(location)
         render json: {
-            navigation: @navigation
+            reviews: @reviews,
+            navigation: @navigation,
+
         }
     end
 
@@ -45,7 +48,7 @@ class Api::CoffeeShopsController < ApplicationController
     private
 
     def coffee_shop_params
-        params.require(:coffee_shop).permit(:name, :address, :hours)
+        params.require(:coffee_shop).permit(:name, :address, :hours, :id)
     end
 
 end

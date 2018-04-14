@@ -1,4 +1,9 @@
 class CoffeeShop < ApplicationRecord
+
+    has_many :reviews, dependent: :destroy
+    has_many :users, :through => :reviews
+
+
     include HTTParty
     # base_uri 'https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key=AIzaSyDhik26QdA3b09N5JGtTnORhD2zyZLDJkk'
 
@@ -7,7 +12,9 @@ class CoffeeShop < ApplicationRecord
     CLIENT_ID = "OAE53NLS2LND0FHVZ14GBSLES2CB2JWNFM200JMSBHPNHGBB"
     CLIENT_SECRET = "VS0QRUM1VDO0U2CMTS1HTCWUF5ZG0PH4UPM3O34GPP2F40KF"
 
-    def self.getShop(id)      
+    def self.getShop(api_id)
+        coffee_shop = find_by api_id: api_id
+        return coffee_shop unless coffee_shop.nil?      
         final_url = VENUE_URL + id + "?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&v=" + VERSION
         @res = HTTParty.get(final_url)
     end
@@ -31,6 +38,8 @@ class CoffeeShop < ApplicationRecord
 
         @response   
     end
+
+
 
 
 

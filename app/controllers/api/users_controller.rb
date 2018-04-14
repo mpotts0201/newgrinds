@@ -8,8 +8,10 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @reviews = @user.reviews
     render json: {
-      user: @user
+      user: @user,
+      reviews: @reviews
     }
   end
 
