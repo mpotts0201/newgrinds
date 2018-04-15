@@ -15,7 +15,7 @@ class CoffeeShop < ApplicationRecord
     def self.getShop(api_id)
         coffee_shop = find_by api_id: api_id
         return coffee_shop unless coffee_shop.nil?      
-        final_url = VENUE_URL + id + "?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&v=" + VERSION
+        final_url = VENUE_URL + api_id + "?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&v=" + VERSION
         @res = HTTParty.get(final_url)
     end
     
@@ -27,13 +27,9 @@ class CoffeeShop < ApplicationRecord
     end 
 
     def self.nav(location)
-        string = ''
-        location.map{|each|  
-            string = string + ' ' + each
-            puts string
-        }
+
         default = "Ponce City Market, Atlanta, GA 30308"
-        @response = HTTParty.get('https://maps.googleapis.com/maps/api/directions/json?origin=' + default + '&destination=' + string + '&key=AIzaSyDhik26QdA3b09N5JGtTnORhD2zyZLDJkk')
+        @response = HTTParty.get('https://maps.googleapis.com/maps/api/directions/json?origin=' + default + '&destination=' + location + '&key=AIzaSyDhik26QdA3b09N5JGtTnORhD2zyZLDJkk')
 
 
         @response   

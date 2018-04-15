@@ -16,13 +16,26 @@ class Api::CoffeeShopsController < ApplicationController
     def show
         venue_id = params[:id]
         @coffee_shop = CoffeeShop.getShop(venue_id)
-        @reviews = @coffee_shop.reviews
-        location = @coffee_shop["response"]["venue"]["location"]["formattedAddress"]
-        @navigation = CoffeeShop.nav(location)
-        render json: {
-            reviews: @reviews,
-            navigation: @navigation,
 
+        # @coffee_shop_local = CoffeeShop.find(params[:id])
+        @location = ''
+        # @reviews = @coffee_shop.reviews
+        if @coffee_shop["response"]
+            array = @coffee_shop["response"]["venue"]["location"]["formattedAddress"]
+            array.map{|each|  
+                @location = @location + ' ' + each
+            }  
+            @location 
+        else 
+            @location = @coffee_shop.address
+        
+        end
+
+        @navigation = CoffeeShop.nav(@location)
+        render json: {
+            # reviews: @reviews,
+            navigation: @navigation,
+            coffee_shop: @coffee_shop,
         }
     end
 
