@@ -26,7 +26,7 @@ class UserIndex extends Component {
                     this.state.users.map((user, i) => {
                         return (
                             <div key={i}>
-                                <h2><Link  className='link' to={`/users/${user.id}`}>{user.name}</Link></h2>
+                                <h2 className='list'><Link  className='link list' to={`/users/${user.id}`}>{user.name}</Link></h2>
                             </div>
                         )
                     })

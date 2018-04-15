@@ -56,7 +56,7 @@ class UserShow extends Component {
             return <Redirect to='/users' render={UserIndex}/>
         }
         return (
-            <div className='update' >
+            <div className='search list' >
                 <h1>{this.state.name}</h1>
                 <h4>{this.state.aboutMe}</h4>
                 <button onClick={this.toggle}>Update User Info</button>

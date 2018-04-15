@@ -63,12 +63,12 @@ class App extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     this.sendShop()
-    this.setState({
-      city: '',
-      state: '',
-      streetAddress: '',
-      zip: '',
-    })
+    // this.setState({
+    //   city: '',
+    //   state: '',
+    //   streetAddress: '',
+    //   zip: '',
+    // })
   }
 
 
@@ -126,11 +126,25 @@ class App extends Component {
         handleChange={this.handleChange}
         value={this.state.value}
         handleSubmit={this.handleSubmit}
+        city={this.state.city}
+        state={this.state.state}
+        streetAddress={this.state.streetAddress}
+        zip={this.state.zip}
+        lat={this.state.lat}
+        long={this.state.long}
       />
     }
 
     const CoffeeShopShowWrapper = (props) => {
-      return <CoffeeShopShow getShops={this.getShops} coffeeShops={this.state.coffeeShops} {...props} />
+      return <CoffeeShopShow getShops={this.getShops} 
+      coffeeShops={this.state.coffeeShops} 
+      city={this.state.city}
+      state={this.state.state}
+      streetAddress={this.state.streetAddress}
+      zip={this.state.zip}
+      lat={this.state.lat}
+      long={this.state.long}
+      {...props} />
     }
 
 

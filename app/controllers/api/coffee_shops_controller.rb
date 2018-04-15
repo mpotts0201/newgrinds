@@ -14,8 +14,21 @@ class Api::CoffeeShopsController < ApplicationController
     end
 
     def show
-        venue_id = params[:id]
-        @coffee_shop = CoffeeShop.getShop(venue_id)
+        if (!params[:city].nil? || !params[:state].nil? || !params[:streetAddress].nil? || !params[:zip].nil?)
+            @api_id = params[:api_id]
+            @city = params[:city]
+            @state = params[:state]
+            @street_address = params[:streetAddress]
+            @zip = params[:zip].to_s
+
+            @origin = @street_address + ' ' + @city + ' ,' + @state + ' ,' + @zip
+        elsif !params[:lat].nil? && !params[:long].nil?
+            @lat = params[:lat].to_s
+            @long = params[:long].to_s
+            @api_id = params[:api_id]
+            @origin = @lat + ',' + @long
+        end
+        @coffee_shop = CoffeeShop.getShop(@api_id)
 
         # @coffee_shop_local = CoffeeShop.find(params[:id])
         @location = ''
@@ -31,7 +44,7 @@ class Api::CoffeeShopsController < ApplicationController
         
         end
 
-        @navigation = CoffeeShop.nav(@location)
+        @navigation = CoffeeShop.nav(@origin,@location)
         render json: {
             # reviews: @reviews,
             navigation: @navigation,

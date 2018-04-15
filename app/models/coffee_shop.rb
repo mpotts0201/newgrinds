@@ -31,10 +31,9 @@ class CoffeeShop < ApplicationRecord
         @res = HTTParty.get(final_url)
     end 
 
-    def self.nav(location)
+    def self.nav(origin, location)
 
-        default = "Ponce City Market, Atlanta, GA 30308"
-        @response = HTTParty.get('https://maps.googleapis.com/maps/api/directions/json?origin=' + default + '&destination=' + location + '&key=AIzaSyDhik26QdA3b09N5JGtTnORhD2zyZLDJkk')
+        @response = HTTParty.get('https://maps.googleapis.com/maps/api/directions/json?origin=' + origin + '&destination=' + location + '&key=AIzaSyDhik26QdA3b09N5JGtTnORhD2zyZLDJkk')
 
 
         @response   

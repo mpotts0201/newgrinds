@@ -20,6 +20,12 @@ class CoffeeShopList extends Component {
                 <Search handleChange={this.props.handleChange}
                     value={this.props.value}
                     handleSubmit={this.props.handleSubmit}
+                    city={this.props.city}
+                    state={this.props.state}
+                    streetAddress={this.props.streetAddress}
+                    zip={this.props.zip}
+                    lat={this.props.lat}
+                    long={this.props.long}
                 />
 
 

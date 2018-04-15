@@ -19,25 +19,30 @@ class CoffeeShopShow extends Component {
         this.callNavData()
     }
 
-    getShop = async () => {
-        const res = await axios({
-            method: 'GET',
-            url: `https://api.foursquare.com/v2/venues/`,
-            params: {
-                client_id: 'OAE53NLS2LND0FHVZ14GBSLES2CB2JWNFM200JMSBHPNHGBB',
-                client_secret: 'VS0QRUM1VDO0U2CMTS1HTCWUF5ZG0PH4UPM3O34GPP2F40KF',
-                // id: '4e495987ae6014a2fdc4ccf9',
-            }
-        })
-        console.log(res)
-        // console.log(res.data.response.groups[0].items)
-    }
-
     callNavData = async () => {
-        const res = await axios.get(`/api/coffee_shops/${this.props.match.params.id}`)
-        const navigation = res.data.navigation.routes[0].legs[0]
-        this.setState({ navigation: navigation })
-        console.log(this.state.navigation)
+        if (this.props.city || this.props.state || this.props.streetAddress || this.props.zip) {
+            const res = await axios.post(`/nav/`, {
+                city: this.props.city,
+                state: this.props.state,
+                streetAddress: this.props.streetAddress,
+                zip: this.props.zip,
+                api_id: this.props.match.params.id,
+
+            })
+            const navigation = res.data.navigation.routes[0].legs[0]
+            this.setState({ navigation: navigation })
+            console.log(this.state.navigation)
+        }
+        else if (this.props.lat && this.props.long){
+            const res = await axios.post(`/nav/`, {
+                lat: this.props.lat,
+                long: this.props.long,
+                api_id: this.props.match.params.id
+            })
+            const navigation = res.data.navigation.routes[0].legs[0]
+            this.setState({ navigation: navigation })
+            console.log(this.state.navigation)
+        }
 
     }
 
@@ -75,7 +80,7 @@ class CoffeeShopShow extends Component {
                                     {this.state.navigation
                                         ? <p>{this.state.navigation.distance.text}, {this.state.navigation.duration.text} to drive to {shop.name} from {this.state.navigation.start_address}</p>
 
-                                        : null}
+                                        : <h3>No navigation data at this time</h3>}
                                     <a href={shop.url}>{shop.url}</a>
                                 </div>
                             )

@@ -26,8 +26,8 @@ this.setState(newState)
 }
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
+            <div >
+                <form className='list search' onSubmit={this.handleSubmit}>
                         <input type='text' name='name' 
                         placeholder='username' 
                         onChange={this.handleChange} 

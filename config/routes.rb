@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   post '/search', to: 'api/coffee_shops#search'
 
+  post '/nav', to: 'api/coffee_shops#show'
+
   namespace :api do
     resources :reviews
   end
