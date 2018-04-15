@@ -11,6 +11,7 @@ class Search extends Component {
                 <input type='text' name='city'
                     onChange={this.props.handleChange}
                     value={this.props.city}
+                    placeholder={this.props.city}
                 />
                 <br />
 
@@ -19,6 +20,7 @@ class Search extends Component {
                 <input type='text' name='state'
                     onChange={this.props.handleChange}
                     value={this.props.state}
+                    placeholder={this.props.state}
                 />
                 <br />
                 <label htmlFor='streetAddress'>Enter your Street Address: </label>
@@ -26,6 +28,7 @@ class Search extends Component {
                 <input type='text' name='streetAddress'
                     onChange={this.props.handleChange}
                     value={this.props.streetAddress}
+                    placeholder={this.props.streetAddress}
                 />
                 <br />
                 <label htmlFor='zip'>Enter your zip: </label>
@@ -33,6 +36,8 @@ class Search extends Component {
                 <input type='text' name='zip'
                     onChange={this.props.handleChange}
                     value={this.props.zip}
+                    placeholder={this.props.zip}
+
                 />
                 <br />
                 <button type='submit'>Search</button>

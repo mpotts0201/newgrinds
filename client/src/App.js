@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './img/load2.png';
 import './App.css';
 import axios from 'axios'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
@@ -55,7 +55,7 @@ class App extends Component {
 
   handleChange = (event) => {
     const name = event.target.name
-    const newState = {...this.state}
+    const newState = { ...this.state }
     newState[name] = event.target.value
     this.setState(newState)
   }
@@ -63,6 +63,12 @@ class App extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     this.sendShop()
+    this.setState({
+      city: '',
+      state: '',
+      streetAddress: '',
+      zip: '',
+    })
   }
 
 
@@ -88,7 +94,7 @@ class App extends Component {
 
       // },
 
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 },
 
     );
 
@@ -148,7 +154,12 @@ class App extends Component {
       );
     }
     else if (this.state.showWaiting) {
-      return <h1>Waiting for Coordinates...</h1>
+      return (
+        <div className='loading'>
+          <h1>Waiting for Coordinates...</h1>
+          <img className='App-logo' src={logo} alt='LOADING...' />
+        </div>
+      );
     }
   }
 }
