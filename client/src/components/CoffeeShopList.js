@@ -7,15 +7,23 @@ class CoffeeShopList extends Component {
     render() {
         return (
             <div className='list'>
-                <Search handleChange={this.props.handleChange}
-                value={this.props.value}
-                handleSubmit={this.props.handleSubmit}
-                />
+                <h2>5 coffee shops near your location</h2>
+
+
                 {this.props.coffeeShops.map((shop, i) => {
                     return (
                         <h3 key={i} className='list'><Link className='link' to={`/coffeeShop/${shop.id}`}>{shop.name}</Link></h3>
                     )
                 })}
+
+                
+                <Search handleChange={this.props.handleChange}
+                    value={this.props.value}
+                    handleSubmit={this.props.handleSubmit}
+                />
+
+
+
             </div>
         );
     }

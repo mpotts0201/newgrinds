@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  patch '/locate', to: 'api/coffee_shops#locate'
+
   post '/search', to: 'api/coffee_shops#search'
 
   namespace :api do

@@ -9,6 +9,8 @@ import NavBar from './components/NavBar'
 import NewUser from './components/User/NewUser'
 import UserIndex from './components/User/UserIndex'
 import UserShow from './components/User/UserShow'
+
+
 class App extends Component {
 
   state = {
@@ -16,26 +18,35 @@ class App extends Component {
     lat: null,
     long: null,
     error: null,
-    value: '',
+    city: '',
+    state: '',
+    streetAddress: '',
+    zip: '',
+    callSucceeded: false,
+    showWaiting: true,
   }
+
 
 
   componentDidMount() {
     this.requestCurrentPosition()
-    // this.getShops()
-    // this.getShopsBackend()
-
+    if (this.state.callSucceeded) {
+      this.locateShops(this.state.lat.toString(), this.state.long.toString())
+    }
   }
 
-  sendShop = async() => {
+  sendShop = async () => {
     const res = await axios.post("/search", {
-      city: this.state.value
+      city: this.state.city,
+      state: this.state.state,
+      streetAddress: this.state.streetAddress,
+      zip: this.state.zip,
     })
     console.log(res)
     this.setState({ coffeeShops: res.data.coffee_shops.response.venues })
   }
 
-  getShopsBackend = async() => {
+  getShopsBackend = async () => {
 
     const res = await axios.get(`/api/coffee_shops/`)
     this.setState({ coffeeShops: res.data.coffee_shops.response.venues })
@@ -43,12 +54,14 @@ class App extends Component {
   }
 
   handleChange = (event) => {
-    this.setState({ value: event.target.value })
+    const name = event.target.name
+    const newState = {...this.state}
+    newState[name] = event.target.value
+    this.setState(newState)
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
-    // this.getShops(this.state.value)
     this.sendShop()
   }
 
@@ -60,52 +73,53 @@ class App extends Component {
           lat: position.coords.latitude,
           long: position.coords.longitude,
           error: null,
+          showWaiting: false,
+          callSucceeded: true,
+
         });
-        // this.getShops(position.coords.latitude, position.coords.longitude)
-        // this.getShops(33.7722584, -84.3665152)
+        this.locateShops(this.state.lat.toString(), this.state.long.toString())
+
 
       },
-      (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
+      (error) => this.setState({ error: error.message, showWaiting: false }),
+      // (error) => {
+      //   this.setState({ lat: 33, long: -84, callSucceeded: true, showWaiting: false })
+      //   this.locateShops(this.state.lat.toString(), this.state.long.toString())
+
+      // },
+
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+
     );
+
 
   }
 
-  // getShops = async (city) => {
-  //   const res = await axios({
-  //     method: 'GET',
-  //     url: 'https://api.foursquare.com/v2/venues/search',
-  //     params: {
-  //       client_id: process.env.REACT_APP_CLIENT_ID,
-  //       client_secret: process.env.REACT_APP_CLIENT_SECRET,
-  //       // ll: `${lat},${long}`,
-  //       // ll: '33.7722584, -84.3665152',
-  //       near: city + ',GA',
-  //       query: 'coffee',
-  //       v: '20180323',
-  //       limit: 5,
-  //       sortByDistance: 1,
-  //     }
-  //   })
-  //   this.setState({ coffeeShops: res.data.response.venues })
-  //   // console.log(res.data.response.groups[0].items)
-  //   console.log(res.data.response.venues)
-  // }
-
-
+  locateShops = async (lat, long) => {
+    const res = await axios.patch('/locate', {
+      lat: lat,
+      long: long
+    })
+    console.log(res)
+    this.setState({
+      coffeeShops: res.data.coffee_shops.response.venues,
+    })
+  }
 
   render() {
 
+
+
     const UserShowWrapper = (props) => {
-      return <UserShow {...props}/>
+      return <UserShow {...props} />
     }
 
 
     const CoffeeShopListWrapper = (props) => {
-      return <CoffeeShopList coffeeShops={this.state.coffeeShops} {...props} 
-      handleChange={this.handleChange}
-      value={this.state.value}
-      handleSubmit={this.handleSubmit}
+      return <CoffeeShopList coffeeShops={this.state.coffeeShops} {...props}
+        handleChange={this.handleChange}
+        value={this.state.value}
+        handleSubmit={this.handleSubmit}
       />
     }
 
@@ -114,20 +128,28 @@ class App extends Component {
     }
 
 
-    return (
-      <Router>
-        <div className='App'>
-          <NavBar />
-          <Switch>
-            <Route exact path = '/new' component={NewUser}/>
-            <Route exact path='/' render={CoffeeShopListWrapper} />
-            <Route exact path='/coffeeShop/:id' render={CoffeeShopShowWrapper} />
-            <Route exact path='/index' component={UserIndex}/>
-            <Route exact path='/users/:userId' render={UserShowWrapper}/>
-          </Switch>
-        </div>
-      </Router>
-    );
+    if (this.state.callSucceeded || this.state.error) {
+
+      return (
+        <Router>
+          <div className='App'>
+
+            <NavBar />
+
+            <Switch>
+              <Route exact path='/new' component={NewUser} />
+              <Route exact path='/' render={CoffeeShopListWrapper} />
+              <Route exact path='/coffeeShop/:id' render={CoffeeShopShowWrapper} />
+              <Route exact path='/index' component={UserIndex} />
+              <Route exact path='/users/:userId' render={UserShowWrapper} />
+            </Switch>
+          </div>
+        </Router>
+      );
+    }
+    else if (this.state.showWaiting) {
+      return <h1>Waiting for Coordinates...</h1>
+    }
   }
 }
 

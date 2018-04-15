@@ -21,8 +21,13 @@ class CoffeeShop < ApplicationRecord
     
     VENUES_URL = "https://api.foursquare.com/v2/venues/search/"
     
-    def self.getShops(city)
-        final_url = VENUES_URL + "?near=" + city + ",GA"  + "&query=coffee" + "&limit=5" + "&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&v=" + VERSION
+    def self.getShops(location)
+        final_url = VENUES_URL + "?near=" + location + "&query=coffee" + "&limit=5" + "&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&sortByDistance=1" + "&v=" + VERSION
+        @res = HTTParty.get(final_url)
+    end 
+
+    def self.locateShops(coord)
+        final_url = VENUES_URL + "?ll=" + coord + "&query=coffee" + "&limit=5" + "&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&sortByDistance=1" + "&v=" + VERSION
         @res = HTTParty.get(final_url)
     end 
 

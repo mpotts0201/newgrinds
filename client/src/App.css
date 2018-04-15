@@ -55,7 +55,7 @@ ul>li>.menu:hover {
 }
 
 
-.link, .update {
+.link, .update, .search {
   color: rgb(255, 252, 220);
   font-family: 'Gudea', sans-serif;
   text-decoration: none;

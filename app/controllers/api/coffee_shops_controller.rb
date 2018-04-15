@@ -48,11 +48,34 @@ class Api::CoffeeShopsController < ApplicationController
 
     def search
         @city = params[:city]
-        @coffee_shops = CoffeeShop.getShops(@city)
+        @state = params[:state]
+        @street_address = params[:streetAddress]
+        @zip = params[:zip].to_s
+
+        @location = @street_address + ' ' + @city + ' ,' + @state + ' ,' + @zip
+        
+        puts @location
+
+        @coffee_shops = CoffeeShop.getShops(@location)
 
 
         render json: {
             coffee_shops: @coffee_shops,
+        }
+    end
+
+    def locate
+        @lat = params[:lat]
+        @long = params[:long]
+
+
+
+        @coord = @lat + ',' + @long
+
+        @coffee_shops = CoffeeShop.locateShops(@coord)
+
+        render json: {
+            coffee_shops: @coffee_shops
         }
     end
 
@@ -61,7 +84,7 @@ class Api::CoffeeShopsController < ApplicationController
     private
 
     def coffee_shop_params
-        params.require(:coffee_shop).permit(:name, :address, :hours, :id)
+        params.require(:coffee_shop).permit(:name, :address, :hours, :api_id, :description)
     end
 
 end
