@@ -14,7 +14,13 @@ class Api::CoffeeShopsController < ApplicationController
     end
 
     def show
-        if (!params[:city].nil? || !params[:state].nil? || !params[:streetAddress].nil? || !params[:zip].nil?)
+        
+        if !params[:lat].nil? && !params[:long].nil?
+            @lat = params[:lat].to_s
+            @long = params[:long].to_s
+            @api_id = params[:api_id]
+            @origin = @lat + ',' + @long
+        elsif (!params[:city].nil? || !params[:state].nil? || !params[:streetAddress].nil? || !params[:zip].nil?)
             @api_id = params[:api_id]
             @city = params[:city]
             @state = params[:state]
@@ -22,11 +28,7 @@ class Api::CoffeeShopsController < ApplicationController
             @zip = params[:zip].to_s
 
             @origin = @street_address + ' ' + @city + ' ,' + @state + ' ,' + @zip
-        elsif !params[:lat].nil? && !params[:long].nil?
-            @lat = params[:lat].to_s
-            @long = params[:long].to_s
-            @api_id = params[:api_id]
-            @origin = @lat + ',' + @long
+
         end
         @coffee_shop = CoffeeShop.getShop(@api_id)
 

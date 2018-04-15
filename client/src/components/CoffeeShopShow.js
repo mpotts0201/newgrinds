@@ -20,7 +20,18 @@ class CoffeeShopShow extends Component {
     }
 
     callNavData = async () => {
-        if (this.props.city || this.props.state || this.props.streetAddress || this.props.zip) {
+
+        if (this.props.lat && this.props.long){
+            const res = await axios.post(`/nav/`, {
+                lat: this.props.lat,
+                long: this.props.long,
+                api_id: this.props.match.params.id
+            })
+            const navigation = res.data.navigation.routes[0].legs[0]
+            this.setState({ navigation: navigation })
+            console.log(this.state.navigation)
+        }
+        else if (this.props.city || this.props.state || this.props.streetAddress || this.props.zip) {
             const res = await axios.post(`/nav/`, {
                 city: this.props.city,
                 state: this.props.state,
@@ -33,16 +44,7 @@ class CoffeeShopShow extends Component {
             this.setState({ navigation: navigation })
             console.log(this.state.navigation)
         }
-        else if (this.props.lat && this.props.long){
-            const res = await axios.post(`/nav/`, {
-                lat: this.props.lat,
-                long: this.props.long,
-                api_id: this.props.match.params.id
-            })
-            const navigation = res.data.navigation.routes[0].legs[0]
-            this.setState({ navigation: navigation })
-            console.log(this.state.navigation)
-        }
+
 
     }
 
