@@ -170,7 +170,7 @@ class App extends Component {
     else if (this.state.showWaiting) {
       return (
         <div className='loading'>
-          <h1>Waiting for Coordinates...</h1>
+          <h1>Looking for shops near you...</h1>
           <img className='App-logo' src={logo} alt='LOADING...' />
         </div>
       );
