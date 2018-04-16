@@ -39,6 +39,9 @@ class CoffeeShop < ApplicationRecord
         @response   
     end
 
+    def getReviews
+        @reviews = Review.where()
+    end 
 
 
 

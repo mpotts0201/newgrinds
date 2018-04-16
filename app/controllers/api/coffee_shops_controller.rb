@@ -14,12 +14,16 @@ class Api::CoffeeShopsController < ApplicationController
     end
 
     def show
+
+        # takes navigation call if sending lat and long
         
         if !params[:lat].nil? && !params[:long].nil?
             @lat = params[:lat].to_s
             @long = params[:long].to_s
             @api_id = params[:api_id]
             @origin = @lat + ',' + @long
+
+        # takes call if sending any number of details/ not lat and long
         elsif (!params[:city].nil? || !params[:state].nil? || !params[:streetAddress].nil? || !params[:zip].nil?)
             @api_id = params[:api_id]
             @city = params[:city]
@@ -27,28 +31,47 @@ class Api::CoffeeShopsController < ApplicationController
             @street_address = params[:streetAddress]
             @zip = params[:zip].to_s
 
+        # @origin is string being built to be passed into nav call 
+
             @origin = @street_address + ' ' + @city + ' ,' + @state + ' ,' + @zip
 
         end
+
+        # calling api for details on destination
         @coffee_shop = CoffeeShop.getShop(@api_id)
 
-        # @coffee_shop_local = CoffeeShop.find(params[:id])
+        # string to store destination for nav call
         @location = ''
-        # @reviews = @coffee_shop.reviews
+
+        # if the shop data is from api call and not yet saved to database
         if @coffee_shop["response"]
             array = @coffee_shop["response"]["venue"]["location"]["formattedAddress"]
             array.map{|each|  
                 @location = @location + ' ' + each
             }  
             @location 
+
+        # if shop data is fom local database 
         else 
             @location = @coffee_shop.address
         
         end
 
+        # calling for reviews if any are saved to database
+        @reviews = @coffee_shop.reviews
+
+        # @coffee_shop.reviews 
+        # this method is not yet complete 
+        # needs to find a way to associate api_id with reviews 
+        # or find a way to save coffee shop to database when review is 
+            # posted so review associates with local id
+        # Would have to fix the way params are passed into this show method 
+            # use a git with params axios({ method: "get", params: {...} })
+            # Because shops are being saved everytime a post is made from 
+            # front end with duplicate id's
         @navigation = CoffeeShop.nav(@origin,@location)
         render json: {
-            # reviews: @reviews,
+            reviews: @reviews,
             navigation: @navigation,
             coffee_shop: @coffee_shop,
         }
