@@ -58,7 +58,8 @@ class Api::CoffeeShopsController < ApplicationController
         end
 
         # calling for reviews if any are saved to database
-        @reviews = @coffee_shop.reviews
+
+        # @reviews = @coffee_shop.reviews
 
         # @coffee_shop.reviews 
         # this method is not yet complete 
@@ -66,12 +67,12 @@ class Api::CoffeeShopsController < ApplicationController
         # or find a way to save coffee shop to database when review is 
             # posted so review associates with local id
         # Would have to fix the way params are passed into this show method 
-            # use a git with params axios({ method: "get", params: {...} })
+            # use a get with params axios({ method: "get", params: {...} })
             # Because shops are being saved everytime a post is made from 
-            # front end with duplicate id's
+            # front end with duplicate api_id's
         @navigation = CoffeeShop.nav(@origin,@location)
         render json: {
-            reviews: @reviews,
+            # reviews: @reviews,
             navigation: @navigation,
             coffee_shop: @coffee_shop,
         }
@@ -80,7 +81,31 @@ class Api::CoffeeShopsController < ApplicationController
 
 
     def create
-        @coffee_shop = CoffeeShop.create(coffee_shop_params)
+        @api_id = params[:api_id]
+
+        
+
+        @coffee_shop_info = CoffeeShop.getShop(api_id)
+        array = @coffee_shop_info["response"]["venue"]["location"]["formattedAddress"]
+        @address = ''
+        array.map{|each|  
+            @address = @address + ' ' + each
+        }  
+
+        if CoffeeShop.find_by api_id: @api_id
+            @coffee_shop = CoffeeShop.find_by api_id: @api_id
+        else
+            @coffee_shop = CoffeeShop.create({
+                name: @coffee_shop_info["response"]["venue"]["name"],
+                address: @address,
+                
+            })
+        end
+
+
+        render json: {
+            coffee_shop: @coffee_shop
+        }
         
     end
 

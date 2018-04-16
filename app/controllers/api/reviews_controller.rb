@@ -12,7 +12,21 @@ class Api::ReviewsController < ApplicationController
     end 
 
     def create 
-        Review.create(review_params)
+        @coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
+
+        @user = User.find_by(name: "Murphy Potts")
+        @review = Review.new(review_params)
+
+        @coffee_shop.reviews << @review
+        @user.reviews << @review
+
+        @coffee_shop.save!
+        @user.save!
+
+        render json: @review
+
+
+
     end 
 
     def destroy 
@@ -26,7 +40,7 @@ class Api::ReviewsController < ApplicationController
     private
 
     def review_params
-        params.require(:review).permit(:title, :text, :users_id, :coffee_shops_id)
+        params.require(:review).permit(:title, :text)
     end
 
 

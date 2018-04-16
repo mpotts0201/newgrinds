@@ -6,16 +6,14 @@ Rails.application.routes.draw do
 
   post '/nav', to: 'api/coffee_shops#show'
 
-  namespace :api do
-    resources :reviews
-  end
+
   namespace :api do
     resources :users
+    resources :coffee_shops do 
+      resources :reviews
+    end 
   end
 
-  namespace :api do 
-    resources :coffee_shops
-  end
 
 
 end

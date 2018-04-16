@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-
+import NewReview from './NewReview'
 
 
 
@@ -12,6 +12,8 @@ class CoffeeShopShow extends Component {
         coffeeShop: {
             name: null,
         },
+        title: '',
+        text: '',
 
     }
 
@@ -19,9 +21,33 @@ class CoffeeShopShow extends Component {
         this.callNavData()
     }
 
+    handleChange = (event) => {
+        const name = event.target.name
+        const newState = { ...this.state }
+        newState[name] = event.target.value
+        this.setState(newState)
+    }
+
+    handleSubmit = async(event) => {
+        event.preventDefault()
+        const shopRes = await axios.post('/api/coffee_shops', {
+            api_id: this.props.match.params.id
+            
+        })
+        console.log(shopRes)
+        // const res = await axios.post(`/api/coffee_shops/${shopRes.data.coffee_shop.id}/reviews`, {
+        //     title: this.state.title,
+        //     text: this.state.text
+        // })
+
+        
+
+
+    }
+
     callNavData = async () => {
 
-        if (this.props.lat && this.props.long){
+        if (this.props.lat && this.props.long) {
             const res = await axios.post(`/nav/`, {
                 lat: this.props.lat,
                 long: this.props.long,
@@ -90,7 +116,11 @@ class CoffeeShopShow extends Component {
                     })
                 }
 
-
+                <NewReview handleChange={this.handleChange}
+                    title={this.state.title}
+                    text={this.state.text}
+                    handleSubmit={this.handleSubmit}
+                />
             </div>
         );
     }

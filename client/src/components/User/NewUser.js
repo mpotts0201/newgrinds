@@ -11,11 +11,11 @@ state = {
 }
 
 handleSubmit = async(event) => {
+
     const res = await axios.post('/api/users/', {
         name: this.state.name,
         aboutMe: this.state.aboutMe
     })
-    console.log(event)
 }
 
 handleChange = (event) => {

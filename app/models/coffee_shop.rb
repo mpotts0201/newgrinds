@@ -1,6 +1,7 @@
 class CoffeeShop < ApplicationRecord
 
-    has_many :reviews, dependent: :destroy
+    has_many :reviews
+    # :foreign_key => :api_id, :primary_key => :api_id
     has_many :users, :through => :reviews
 
 
