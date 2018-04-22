@@ -14,8 +14,8 @@ class CoffeeShop < ApplicationRecord
     CLIENT_SECRET = "VS0QRUM1VDO0U2CMTS1HTCWUF5ZG0PH4UPM3O34GPP2F40KF"
 
     def self.getShop(api_id)
-        coffee_shop = find_by api_id: api_id
-        return coffee_shop unless coffee_shop.nil?      
+        # coffee_shop = find_by api_id: api_id
+        # return coffee_shop unless coffee_shop.nil?      
         final_url = VENUE_URL + api_id + "?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&v=" + VERSION
         @res = HTTParty.get(final_url)
     end

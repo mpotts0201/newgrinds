@@ -9,9 +9,7 @@ class CoffeeShopShow extends Component {
 
     state = {
         coffeeShops: [],
-        coffeeShop: {
-            name: null,
-        },
+        coffeeShop: {},
         title: '',
         text: '',
 
@@ -30,8 +28,15 @@ class CoffeeShopShow extends Component {
 
     handleSubmit = async(event) => {
         event.preventDefault()
+        let location = ''
+        this.state.coffeeShop.location.formattedAddress.map((each, i) => {
+            location = location + ' ' + each
+        })
+        console.log(location)
         const shopRes = await axios.post('/api/coffee_shops', {
-            api_id: this.props.match.params.id
+            api_id: this.props.match.params.id,
+            name: this.state.coffeeShop.name,
+            address: location
             
         })
         console.log(shopRes)
@@ -53,9 +58,14 @@ class CoffeeShopShow extends Component {
                 long: this.props.long,
                 api_id: this.props.match.params.id
             })
+            const coffeeShop = res.data.coffee_shop.response.venue
+
             const navigation = res.data.navigation.routes[0].legs[0]
-            this.setState({ navigation: navigation })
-            console.log(this.state.navigation)
+            this.setState({ 
+                navigation: navigation,
+                coffeeShop: coffeeShop
+             })
+            console.log(res.data)
         }
         else if (this.props.city || this.props.state || this.props.streetAddress || this.props.zip) {
             const res = await axios.post(`/nav/`, {
@@ -66,8 +76,13 @@ class CoffeeShopShow extends Component {
                 api_id: this.props.match.params.id,
 
             })
+            const coffeeShop = res.data.coffee_shop.response.venue
             const navigation = res.data.navigation.routes[0].legs[0]
-            this.setState({ navigation: navigation })
+            console.log(res.data)
+            this.setState({ 
+                navigation: navigation,
+                coffeeShop:  coffeeShop
+             })
             console.log(this.state.navigation)
         }
 

@@ -37,25 +37,21 @@ class Api::CoffeeShopsController < ApplicationController
 
         end
 
+
         # calling api for details on destination
         @coffee_shop = CoffeeShop.getShop(@api_id)
+
 
         # string to store destination for nav call
         @location = ''
 
         # if the shop data is from api call and not yet saved to database
-        if @coffee_shop["response"]
             array = @coffee_shop["response"]["venue"]["location"]["formattedAddress"]
             array.map{|each|  
                 @location = @location + ' ' + each
             }  
             @location 
 
-        # if shop data is fom local database 
-        else 
-            @location = @coffee_shop.address
-        
-        end
 
         # calling for reviews if any are saved to database
 
@@ -82,22 +78,24 @@ class Api::CoffeeShopsController < ApplicationController
 
     def create
         @api_id = params[:api_id]
-
+        @name = params[:name]
+        @address = params[:address]
         
 
-        @coffee_shop_info = CoffeeShop.getShop(api_id)
-        array = @coffee_shop_info["response"]["venue"]["location"]["formattedAddress"]
-        @address = ''
-        array.map{|each|  
-            @address = @address + ' ' + each
-        }  
+        # @coffee_shop_info = CoffeeShop.getShop(api_id)
+        # array = @coffee_shop_info["response"]["venue"]["location"]["formattedAddress"]
+        # @address = ''
+        # array.map{|each|  
+        #     @address = @address + ' ' + each
+        # }  
 
         if CoffeeShop.find_by api_id: @api_id
             @coffee_shop = CoffeeShop.find_by api_id: @api_id
         else
             @coffee_shop = CoffeeShop.create({
-                name: @coffee_shop_info["response"]["venue"]["name"],
+                name: @name,
                 address: @address,
+                api_id: @api_id
                 
             })
         end
