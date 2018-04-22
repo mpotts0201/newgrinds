@@ -6,7 +6,16 @@ class NewReview extends Component {
     render() {
         return (
             <div>
+                
                 <form className='list search' onSubmit={this.props.handleSubmit}>
+                
+                <label htmlFor='stars'>Give a star rating out of 5: </label>
+                    <input type='text' 
+                    name='stars'
+                    onChange={this.props.handleChange}
+                    value={this.props.stars}
+                    placeholder='1-5'
+                    />
                     <label htmlFor='title'>Title of Review: </label>
                     <input type='text' 
                     name='title'

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Gudea|Shrikhand');
 
+
 h1 {
   font-family: 'Anton', sans-serif;
   color: rgb(255, 252, 220);
@@ -224,6 +225,21 @@ button{
   border-radius: 5px;
   margin: 3px;
 }
+
+.dash{
+  display: flex;
+  flex-direction: row;
+}
+
+.info{
+  max-width: 600px;
+}
+
+.review{
+  max-width: 300px;
+}
+
+
 
 
 @media(max-width: 500px){
