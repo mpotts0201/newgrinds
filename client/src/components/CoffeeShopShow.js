@@ -15,6 +15,8 @@ class CoffeeShopShow extends Component {
         stars: '',
         newReview: false,
         reviews: [],
+        rating: 0,
+        ratingDisplay: []
 
     }
 
@@ -35,10 +37,11 @@ class CoffeeShopShow extends Component {
         this.state.coffeeShop.location.formattedAddress.map((each, i) => {
             location = location + ' ' + each
         })
+        
         const shopRes = await axios.post('/api/coffee_shops', {
             api_id: this.props.match.params.id,
             name: this.state.coffeeShop.name,
-            address: location
+            address: location,
 
         })
         console.log(shopRes)
@@ -48,6 +51,7 @@ class CoffeeShopShow extends Component {
             stars: this.state.stars,
         })
         console.log(res)
+        this.callNavData()
 
 
 
@@ -94,7 +98,8 @@ class CoffeeShopShow extends Component {
             })
             console.log(this.state.navigation)
         }
-
+        this.getRating()
+        this.getDisplayRating()
 
     }
 
@@ -102,6 +107,25 @@ class CoffeeShopShow extends Component {
         this.setState({ newReview: !this.state.newReview })
     }
 
+    getDisplayRating = () => {
+        const arr = []
+        for (let j = 0; j < this.state.rating; j++) {
+            arr.push(<span key={j} className='fa fa-star checked fa-2x'></span>)
+        }
+        this.setState({ ratingDisplay: arr })
+    }
+
+    getRating = () => {
+        if (this.state.reviews.map) {
+            let total = 0
+            this.state.reviews.map((review) => {
+                total += review.stars
+            })
+            this.setState({
+                rating: total / this.state.reviews.length
+            })
+        }
+    }
 
     render() {
         return (
@@ -122,11 +146,13 @@ class CoffeeShopShow extends Component {
 
 
                 <div className='dash'>
+
                     {
                         this.props.coffeeShops.map((shop, i) => {
                             if (shop.id == this.props.match.params.id) {
                                 return (
                                     <div key={i} className='update info'>
+                                        {this.state.ratingDisplay}
                                         <h1>{shop.name}</h1>
                                         <h3>{shop.location.formattedAddress.map((each, i) => {
                                             return (

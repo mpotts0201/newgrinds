@@ -238,6 +238,11 @@ button{
 .review{
   max-width: 300px;
 }
+.checked {
+  padding-top: 10px;
+  margin: 0 5px;
+  color: orange;
+}
 
 
 
@@ -292,4 +297,13 @@ button{
   }
 
 
+
+}
+
+@media(max-width: 800px){
+  .dash{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

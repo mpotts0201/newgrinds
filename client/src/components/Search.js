@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Search extends Component {
     render() {
         return (
-            <form className='search list' onSubmit={this.props.handleSubmit}>
+            <form className='search list info' onSubmit={this.props.handleSubmit}>
                 <h2>If we did not find any shops, Please enter as many details about your location as possible</h2>
                 <br />
                 <label htmlFor='city'>Enter your City: </label>
