@@ -32,7 +32,6 @@ class CoffeeShopShow extends Component {
         this.state.coffeeShop.location.formattedAddress.map((each, i) => {
             location = location + ' ' + each
         })
-        console.log(location)
         const shopRes = await axios.post('/api/coffee_shops', {
             api_id: this.props.match.params.id,
             name: this.state.coffeeShop.name,
@@ -40,10 +39,11 @@ class CoffeeShopShow extends Component {
             
         })
         console.log(shopRes)
-        // const res = await axios.post(`/api/coffee_shops/${shopRes.data.coffee_shop.id}/reviews`, {
-        //     title: this.state.title,
-        //     text: this.state.text
-        // })
+        const res = await axios.post(`/api/coffee_shops/${shopRes.data.coffee_shop.id}/reviews`, {
+            title: this.state.title,
+            text: this.state.text,
+        })
+        console.log(res)
 
         
 

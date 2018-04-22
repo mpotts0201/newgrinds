@@ -54,21 +54,11 @@ class Api::CoffeeShopsController < ApplicationController
 
 
         # calling for reviews if any are saved to database
+        @reviews = CoffeeShop.getReviews(@api_id)
 
-        # @reviews = @coffee_shop.reviews
-
-        # @coffee_shop.reviews 
-        # this method is not yet complete 
-        # needs to find a way to associate api_id with reviews 
-        # or find a way to save coffee shop to database when review is 
-            # posted so review associates with local id
-        # Would have to fix the way params are passed into this show method 
-            # use a get with params axios({ method: "get", params: {...} })
-            # Because shops are being saved everytime a post is made from 
-            # front end with duplicate api_id's
         @navigation = CoffeeShop.nav(@origin,@location)
         render json: {
-            # reviews: @reviews,
+            reviews: @reviews,
             navigation: @navigation,
             coffee_shop: @coffee_shop,
         }

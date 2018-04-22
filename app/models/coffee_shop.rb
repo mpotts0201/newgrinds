@@ -40,8 +40,16 @@ class CoffeeShop < ApplicationRecord
         @response   
     end
 
-    def getReviews
-        @reviews = Review.where()
+    def self.getReviews(api_id)
+        coffee_shop = find_by api_id: api_id
+        if coffee_shop
+            return coffee_shop.reviews
+        elsif coffee_shop.nil?
+            return "No reviews"
+        end
+        
+
+        
     end 
 
 
