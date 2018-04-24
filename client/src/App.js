@@ -9,6 +9,7 @@ import NavBar from './components/NavBar'
 import NewUser from './components/User/NewUser'
 import UserIndex from './components/User/UserIndex'
 import UserShow from './components/User/UserShow'
+import video from './videos/coffeepour.mp4'
 
 
 class App extends Component {
@@ -138,15 +139,15 @@ class App extends Component {
     }
 
     const CoffeeShopShowWrapper = (props) => {
-      return <CoffeeShopShow getShops={this.getShops} 
-      coffeeShops={this.state.coffeeShops} 
-      city={this.state.city}
-      state={this.state.state}
-      streetAddress={this.state.streetAddress}
-      zip={this.state.zip}
-      lat={this.state.lat}
-      long={this.state.long}
-      {...props} />
+      return <CoffeeShopShow getShops={this.getShops}
+        coffeeShops={this.state.coffeeShops}
+        city={this.state.city}
+        state={this.state.state}
+        streetAddress={this.state.streetAddress}
+        zip={this.state.zip}
+        lat={this.state.lat}
+        long={this.state.long}
+        {...props} />
     }
 
 
@@ -154,17 +155,25 @@ class App extends Component {
 
       return (
         <Router>
-          <div className='App'>
-
+          <div >
+            <div id="myVideo">
+            <video autoPlay muted loop >
+              <source src={video} type="video/mp4" />
+            </video>
+            </div>
+            <div id='content'>
             <NavBar />
 
-            <Switch>
-              <Route exact path='/new' component={NewUser} />
-              <Route exact path='/' render={CoffeeShopListWrapper} />
-              <Route exact path='/coffeeShop/:id' render={CoffeeShopShowWrapper} />
-              <Route exact path='/index' component={UserIndex} />
-              <Route exact path='/users/:userId' render={UserShowWrapper} />
-            </Switch>
+            <div className='App' >
+              <Switch>
+                <Route exact path='/new' component={NewUser} />
+                <Route exact path='/' render={CoffeeShopListWrapper} />
+                <Route exact path='/coffeeShop/:id' render={CoffeeShopShowWrapper} />
+                <Route exact path='/index' component={UserIndex} />
+                <Route exact path='/users/:userId' render={UserShowWrapper} />
+              </Switch>
+            </div>
+            </div>
           </div>
         </Router>
       );

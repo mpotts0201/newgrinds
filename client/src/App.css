@@ -1,11 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Gudea|Shrikhand');
 
+#myVideo {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+#content{
+  position: relative;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
 
 h1 {
   font-family: 'Anton', sans-serif;
   color: rgb(255, 252, 220);
   font-weight: 700;
   font-size: 40px;
+}
+
+form {
+  align-items: center;
+}
+
+h2{
+  text-align:center;
 }
 
 .header {
@@ -21,11 +45,15 @@ span {
   flex-direction: row;
   justify-content: space-around;
   animation: navbar 0.25s ease-in;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.719);
+  height: 110px;
 }
 
 .bar {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 ul>li {
@@ -33,7 +61,6 @@ ul>li {
   margin: 5px 10px;
   /* background: rgba(0, 0, 0, 0.425); */
   border-radius: 5px;
-  padding: 5px;
   font-family: 'Anton', sans-serif;
   font-weight: 700;
 
@@ -68,6 +95,10 @@ ul>li>.menu:hover {
 
 }
 
+.search{
+  align-items:center;
+}
+
 .link:hover {
   cursor: pointer;
   color: rgb(255, 241, 87);
@@ -76,7 +107,9 @@ ul>li>.menu:hover {
 }
 
 .App {
-  text-align: center;
+
+  display: flex;
+  justify-content: center;
 }
 
 .App-logo {
@@ -136,6 +169,10 @@ a{
   color: rgb(255, 252, 220);
 }
 
+.address{
+  font-size: 20px;
+}
+
 input, textarea{
   background: none;
   color: rgb(255, 252, 220);
@@ -186,6 +223,8 @@ input, textarea{
 .list {
   animation: slide 0.25s ease-in;
   margin: 25px;
+  width: 70vw;
+  align-items: center;
 }
 
 .update{
@@ -233,10 +272,12 @@ button{
 
 .info{
   max-width: 600px;
+  text-align: center;
 }
 
 .review{
   max-width: 300px;
+  text-align: center;
 }
 .checked {
   padding-top: 10px;
@@ -245,7 +286,20 @@ button{
 }
 
 
+.shops{
+  font-size: 2rem;
+}
 
+/* .results {
+  background-image: url('');
+
+  height: 500px; 
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
 
 @media(max-width: 500px){
   .nav {
@@ -307,3 +361,4 @@ button{
     align-items: center;
   }
 }
+
