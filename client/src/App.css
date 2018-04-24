@@ -304,6 +304,7 @@ button{
 @media(max-width: 500px){
   .nav {
     flex-direction: column;
+    width: 100vw;
   }
   h1{
     font-size: 30px;
@@ -352,6 +353,7 @@ button{
 
 
 
+
 }
 
 @media(max-width: 800px){
@@ -362,3 +364,24 @@ button{
   }
 }
 
+@media(max-width: 600px){
+  .link {
+    display: block;
+    width: 80%;
+    right: 0;
+  }
+}
+
+@media(max-width: 400px){
+
+  .bar{
+    flex-direction: column;
+
+  }
+
+  .nav{
+    padding-bottom: 30px;
+  }
+
+
+}
