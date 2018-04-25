@@ -9,7 +9,7 @@ import NavBar from './components/NavBar'
 import NewUser from './components/User/NewUser'
 import UserIndex from './components/User/UserIndex'
 import UserShow from './components/User/UserShow'
-import video from './videos/coffeepour.mp4'
+import video from './videos/newgrinds.mp4'
 
 
 class App extends Component {
