@@ -27,6 +27,7 @@ h1 {
 
 form {
   align-items: center;
+  width: 30vw;
 }
 
 h2{
@@ -93,14 +94,17 @@ ul>li>.menu:hover {
   text-decoration: none;
   background: rgba(0, 0, 0, 0.425);
   border-radius: 5px;
-  width: 75vw;
+  /* width: 30vw; */
   padding: 10px;
   margin: 10px;
+  display: block;
 
 }
 
 .search{
+  
   align-items:center;
+  text-align: center;
 }
 
 .link:hover {
@@ -184,9 +188,23 @@ input, textarea{
   border: none;
   border-bottom: 1px solid rgb(255, 252, 220);
   border-radius: 5px;
-  text-align: center;
   padding: 10px;
   font-size: 15px;
+  margin-bottom: 50px;
+  display: block;
+  text-align: center;
+
+
+}
+
+label{
+  display: block;
+  text-align: center;
+}
+
+.form{
+  display: flex;
+  justify-content: center;
 }
 
 @keyframes slide {
@@ -227,8 +245,8 @@ input, textarea{
 
 .list {
   animation: slide 0.25s ease-in;
-  margin: 25px;
-  width: 70vw;
+  /* margin: 25px; */
+  width: 30vw;
   align-items: center;
 }
 
@@ -257,6 +275,9 @@ form {
   background: rgba(0, 0, 0, 0.548);
   border-radius: 5px;
   padding: 5px;
+  width: 30vw;
+
+  
 }
 
 button{
@@ -273,16 +294,17 @@ button{
 .dash{
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .info{
-  margin: 0 auto;
-  width: 30vw;
+  margin: 20px auto;
+  min-width: 30vw;
+
 
 }
 
 .review{
-  max-width: 300px;
   text-align: center;
 }
 .checked {

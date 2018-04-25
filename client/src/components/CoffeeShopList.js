@@ -18,6 +18,9 @@ class CoffeeShopList extends Component {
                             )
                         })
                         : <h2 className='warning list'>Bad search, please try again</h2>}
+                        {this.props.coffeeShops === undefined || this.props.coffeeShops.length === 0
+                            ? <h2 className='warning list'>Sorry, we could not find your location</h2>
+                        :null}
                 </div>
                 <Search handleChange={this.props.handleChange}
                     value={this.props.value}

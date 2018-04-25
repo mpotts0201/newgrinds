@@ -68,8 +68,10 @@ class CoffeeShopShow extends Component {
             })
             const coffeeShop = res.data.coffee_shop.response.venue
             const reviews = res.data.reviews
-
-            const navigation = res.data.navigation.routes[0].legs[0]
+            let navigation = []
+            {res.data.navigation.routes[0].legs[0]
+            ? navigation = res.data.navigation.routes[0].legs[0]
+            : navigation = []}
             this.setState({
                 navigation: navigation,
                 coffeeShop: coffeeShop,

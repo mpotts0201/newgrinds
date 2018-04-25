@@ -7,7 +7,7 @@ class NewReview extends Component {
         return (
             <div>
                 
-                <form className='list search' onSubmit={this.props.handleSubmit}>
+                <form className='list search form' onSubmit={this.props.handleSubmit}>
                 
                 <label htmlFor='stars'>Give a star rating out of 5: </label>
                     <input type='text' 
