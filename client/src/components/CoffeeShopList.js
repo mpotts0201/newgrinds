@@ -5,7 +5,7 @@ import Search from './Search'
 class CoffeeShopList extends Component {
     render() {
         return (
-            <div className='list'>
+            <div className=' land'>
 
                 <div className='results'>
 
