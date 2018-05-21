@@ -10,8 +10,9 @@ class CoffeeShop < ApplicationRecord
 
     VENUE_URL = "https://api.foursquare.com/v2/venues/"
     VERSION = "20180410"
-    CLIENT_ID = "OAE53NLS2LND0FHVZ14GBSLES2CB2JWNFM200JMSBHPNHGBB"
-    CLIENT_SECRET = "VS0QRUM1VDO0U2CMTS1HTCWUF5ZG0PH4UPM3O34GPP2F40KF"
+    CLIENT_ID = ENV["CLIENT_ID"]
+    CLIENT_SECRET = ENV["CLIENT_SECRET"]
+    GOOGLE_NAV = ENV["GOOGLE_NAV"]
 
     def self.getShop(api_id)
         # coffee_shop = find_by api_id: api_id
@@ -34,7 +35,7 @@ class CoffeeShop < ApplicationRecord
 
     def self.nav(origin, location)
 
-        @response = HTTParty.get('https://maps.googleapis.com/maps/api/directions/json?origin=' + origin + '&destination=' + location + '&key=AIzaSyDhik26QdA3b09N5JGtTnORhD2zyZLDJkk')
+        @response = HTTParty.get('https://maps.googleapis.com/maps/api/directions/json?origin=' + origin + '&destination=' + location + '&key=' + GOOGLE_NAV)
 
 
         @response   
