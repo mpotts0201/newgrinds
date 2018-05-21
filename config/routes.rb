@@ -6,9 +6,10 @@ Rails.application.routes.draw do
 
   post '/nav', to: 'api/coffee_shops#show'
 
+  mount_devise_token_auth_for 'User', at: 'auth'
+
 
   namespace :api do
-    resources :users
     resources :coffee_shops do 
       resources :reviews
     end 
