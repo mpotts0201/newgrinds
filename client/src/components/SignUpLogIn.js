@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class SignUpLogIn extends Component {
 
     state = {
@@ -49,8 +50,10 @@ class SignUpLogIn extends Component {
                         <label htmlFor='password_confirmation'>password confirmation: </label>
                         <input value={this.state.password_confirmation} name='password_confirmation' onChange={this.handleChange} />
                     </div>
-                    <button onClick={this.signUp}>Sign Up</button>
                     <button onClick={this.signIn}>Log In</button>
+                    <button onClick={this.signUp}>Sign Up</button>
+                    <button onClick={this.props.skipSignIn}>Skip Log In</button>
+
 
                 </form>
 

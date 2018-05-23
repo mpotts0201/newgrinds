@@ -3,12 +3,26 @@ import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import SignUpLogIn from './components/SignUpLogIn'
 import Home from './components/Home'
-
+import { saveAuthTokens, userLoggedIn, setAxiosDefaults, clearAuthTokens } from './util/SessionHeaderUtil'
 
 class App extends Component {
 
   state = {
     signedIn: false,
+  }
+
+  async componentWillMount(){
+    try {
+      const signedIn = userLoggedIn()
+
+      if(signedIn){
+        setAxiosDefaults()
+      }
+
+      this.setState(signedIn)
+    } catch (err){
+      console.log(err)
+    }
   }
 
   signUp = async (email, password, password_confirmation) => {
@@ -19,7 +33,10 @@ class App extends Component {
         password: password,
         password_confirmation: password_confirmation
       }
-      await axios.post('/auth', payload)
+      const response = await axios.post('/auth', payload)
+
+      saveAuthTokens(response.headers)
+
       this.setState({ signedIn: true })
     } catch (error) {
       console.log(error)
@@ -32,11 +49,19 @@ class App extends Component {
         email: email,
         password: password
       }
-      await axios.post('/auth/sign_in', payload)
+      const response = await axios.post('/auth/sign_in', payload)
+
+      saveAuthTokens(response.headers)
+
       this.setState({ signedIn: true })
     } catch (error) {
       console.log(error)
     }
+  }
+
+  skipSignIn = () => {
+    clearAuthTokens()
+    this.setState({ signedIn: true })
   }
 
 
@@ -48,6 +73,7 @@ class App extends Component {
         {...props}
         signUp={this.signUp}
         signIn={this.signIn}
+        skipSignIn={this.skipSignIn}
 
       />
     }
@@ -65,7 +91,10 @@ class App extends Component {
             <Route exact path='/signUp' render={SignUpLogInWrapper} />
             <Route exact path='/' render={HomeWrapper} />
           </Switch>
+
           {this.state.signedIn ? <Redirect to='/' /> : <Redirect to='/signUp' />}
+          <button onClick={clearAuthTokens}>Clear Tokens</button>
+
         </div>
       </Router>
     );
