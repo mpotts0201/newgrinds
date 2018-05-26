@@ -11,7 +11,7 @@ class NavBar extends Component {
                     <li><Link className='menu' to='/favorites'>favorite<span>shops</span></Link></li>
                     <li><Link className='menu' to='/favorites'><span>reviews</span></Link></li>
 
-                    <li><Link className='menu' to='/favorites'>sign<span>out</span></Link></li>
+                    <li><Link className='menu' onClick={this.props.signOut}>sign<span>out</span></Link></li>
 
                 </ul>
             </div>

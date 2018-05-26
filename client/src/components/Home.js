@@ -158,7 +158,7 @@ class Home extends Component {
               </video>
             </div>
             <div id='content'>
-              <NavBar />
+              <NavBar signOut={this.props.signOut}/>
 
               <div className='App' >
                 <Switch>

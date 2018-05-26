@@ -11,16 +11,16 @@ class App extends Component {
     signedIn: false,
   }
 
-  async componentWillMount(){
+  async componentWillMount() {
     try {
       const signedIn = userLoggedIn()
 
-      if(signedIn){
+      if (signedIn) {
         setAxiosDefaults()
       }
 
       this.setState(signedIn)
-    } catch (err){
+    } catch (err) {
       console.log(err)
     }
   }
@@ -59,6 +59,21 @@ class App extends Component {
     }
   }
 
+
+  signOut = async (event) => {
+    try {
+      event.preventDefault()
+
+      await axios.delete('/auth/sign_out')
+
+      clearAuthTokens();
+
+      this.setState({ signedIn: false })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   skipSignIn = () => {
     clearAuthTokens()
     this.setState({ signedIn: true })
@@ -79,7 +94,7 @@ class App extends Component {
     }
 
     const HomeWrapper = (props) => {
-      return <Home {...props} />
+      return <Home {...props} signOut={this.signOut} />
     }
 
 
