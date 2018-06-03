@@ -4,6 +4,12 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import SignUpLogIn from './components/SignUpLogIn'
 import Home from './components/Home'
 import { saveAuthTokens, userLoggedIn, setAxiosDefaults, clearAuthTokens } from './util/SessionHeaderUtil'
+import NewUser from './components/User/NewUser'
+import UserIndex from './components/User/UserIndex'
+import UserShow from './components/User/UserShow'
+// import CoffeeShopList from './components/CoffeeShopList'
+import CoffeeShopShow from './components/CoffeeShopShow'
+import ReactDOM from 'react-dom'
 
 class App extends Component {
 
@@ -11,7 +17,7 @@ class App extends Component {
     signedIn: false,
   }
 
-  async componentWillMount() {
+  componentDidMount() {
     try {
       const signedIn = userLoggedIn()
 
@@ -81,7 +87,41 @@ class App extends Component {
 
 
 
+  
+  
   render() {
+
+    const UserShowWrapper = (props) => {
+      return <UserShow {...props} />
+    }
+
+
+    // const CoffeeShopListWrapper = (props) => {
+    //   return <CoffeeShopList coffeeShops={this.state.coffeeShops} {...props}
+    //     handleChange={this.handleChange}
+    //     value={this.state.value}
+    //     handleSubmit={this.handleSubmit}
+    //     city={this.state.city}
+    //     state={this.state.state}
+    //     streetAddress={this.state.streetAddress}
+    //     zip={this.state.zip}
+    //     lat={this.state.lat}
+    //     long={this.state.long}
+    //   />
+    // }
+
+    const CoffeeShopShowWrapper = (props) => {
+      return <CoffeeShopShow getShops={this.getShops}
+        coffeeShops={this.state.coffeeShops}
+        city={this.state.city}
+        state={this.state.state}
+        streetAddress={this.state.streetAddress}
+        zip={this.state.zip}
+        lat={this.state.lat}
+        long={this.state.long}
+        {...props} />
+    }
+
 
     const SignUpLogInWrapper = (props) => {
       return <SignUpLogIn
@@ -105,6 +145,10 @@ class App extends Component {
           <Switch>
             <Route exact path='/signUp' render={SignUpLogInWrapper} />
             <Route exact path='/' render={HomeWrapper} />
+            <Route exact path='/new' component={NewUser} />
+            <Route exact path='/coffeeShop/:id' render={CoffeeShopShowWrapper} />
+            <Route exact path='/index' component={UserIndex} />
+            <Route exact path='/users/:userId' render={UserShowWrapper} />
           </Switch>
 
           {this.state.signedIn ? <Redirect to='/' /> : <Redirect to='/signUp' />}
