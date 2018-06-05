@@ -11,6 +11,9 @@ import NavBar from './NavBar'
 // import UserShow from './User/UserShow'
 import video from '../videos/newgrinds.mp4'
 
+
+
+
 class Home extends Component {
 
   state = {
@@ -84,8 +87,8 @@ class Home extends Component {
             callSucceeded: true,
 
           });
-          if(this.state.lat && this.state.long){
-          this.locateShops(this.state.lat.toString(), this.state.long.toString())
+          if (this.state.lat && this.state.long) {
+            this.locateShops(this.state.lat.toString(), this.state.long.toString())
           }
 
 
@@ -142,57 +145,45 @@ class Home extends Component {
     //   />
     // }
 
-    // const CoffeeShopShowWrapper = (props) => {
-    //   return <CoffeeShopShow getShops={this.getShops}
-    //     coffeeShops={this.state.coffeeShops}
-    //     city={this.state.city}
-    //     state={this.state.state}
-    //     streetAddress={this.state.streetAddress}
-    //     zip={this.state.zip}
-    //     lat={this.state.lat}
-    //     long={this.state.long}
-    //     {...props} />
-    // }
+
 
     if (this.state.callSucceeded || this.state.error) {
 
       return (
         // <Router>
-        <div >
-          <div id="myVideo">
-            <video autoPlay muted loop >
-              <source src={video} type="video/mp4" />
-            </video>
-          </div>
-          <div id='content'>
-            <NavBar signOut={this.props.signOut} />
+          <div >
+            <div id="myVideo">
+              <video autoPlay muted loop >
+                <source src={video} type="video/mp4" />
+              </video>
+            </div>
+            <div id='content'>
+              <NavBar signOut={this.props.signOut} />
 
 
-            <CoffeeShopList coffeeShops={this.state.coffeeShops}
-              handleChange={this.handleChange}
-              value={this.state.value}
-              handleSubmit={this.handleSubmit}
-              city={this.state.city}
-              state={this.state.state}
-              streetAddress={this.state.streetAddress}
-              zip={this.state.zip}
-              lat={this.state.lat}
-              long={this.state.long}
-            />
+              <CoffeeShopList coffeeShops={this.state.coffeeShops}
+                handleChange={this.handleChange}
+                value={this.state.value}
+                handleSubmit={this.handleSubmit}
+                city={this.state.city}
+                state={this.state.state}
+                streetAddress={this.state.streetAddress}
+                zip={this.state.zip}
+                lat={this.state.lat}
+                long={this.state.long}
+              />
 
-            {/* <div className='App' >
+
+              {/* <div className='App' >
                 <Switch>
-                  <Route exact path='/new' component={NewUser} />
                   <Route exact path='/coffeeShop/:id' render={CoffeeShopShowWrapper} />
-                  <Route exact path='/index' component={UserIndex} />
-                  <Route exact path='/users/:userId' render={UserShowWrapper} />
                 </Switch>
 
               </div> */}
 
 
+            </div>
           </div>
-        </div>
         // </Router>
       );
     }

@@ -29,6 +29,43 @@ class App extends Component {
     } catch (err) {
       console.log(err)
     }
+
+    // await this.requestCurrentPosition()
+  }
+
+  requestCurrentPosition = async () => {
+    try {
+      await navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.setState({
+            lat: position.coords.latitude,
+            long: position.coords.longitude,
+            error: null,
+            showWaiting: false,
+            callSucceeded: true,
+
+          });
+          if (this.state.lat && this.state.long) {
+            this.locateShops(this.state.lat.toString(), this.state.long.toString())
+          }
+
+
+        },
+        (error) => this.setState({ error: error.message, showWaiting: false }),
+        // (error) => {
+        //   this.setState({ lat: 33, long: -84, callSucceeded: true, showWaiting: false })
+        //   this.locateShops(this.state.lat.toString(), this.state.long.toString())
+
+        // },
+
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 },
+
+      );
+    } catch (error) {
+      console.log(error)
+    }
+
+
   }
 
   signUp = async (email, password, password_confirmation) => {
@@ -84,6 +121,7 @@ class App extends Component {
     clearAuthTokens()
     this.setState({ signedIn: true })
   }
+  
 
 
 
