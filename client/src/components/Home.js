@@ -12,7 +12,7 @@ import NavBar from './NavBar'
 import video from '../videos/newgrinds.mp4'
 
 
-
+// Think of ditching coffee shop show and build as single page app, reviews can be modal???
 
 class Home extends Component {
 
